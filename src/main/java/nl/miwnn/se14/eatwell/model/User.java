@@ -1,12 +1,21 @@
 package nl.miwnn.se14.eatwell.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+
 /**
  * @author Bart Molenaars
- * Purpose for the class
+ * Information about a user of Eatwell.
  */
 
+@Entity
 public class User {
+
+    @Id @GeneratedValue
     private Long userId;
+
     private String username;
     private String emailAdress;
     private String password;
