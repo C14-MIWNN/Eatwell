@@ -1,7 +1,6 @@
 package nl.miwnn.se14.eatwell.model;
 
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 /**
@@ -10,23 +9,28 @@ import java.util.Set;
  */
 @Entity
 public class Recipe {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long recipe_id;
-    private String recipe_name;
+
+    @Column(name = "recipe_name")
+    private String name;
+
+    @Column
     private String description;
 
-    public Recipe(String recipe_name, String description) {
-        this.recipe_name = recipe_name;
-        this.description = description;
-    }
-
-    @ManyToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(name = "Recipe_Category", joinColumns = @JoinColumn(name = "recipe_id"),
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinTable(name = "Recipe_Category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category>categories;
+    private Set<Category> categories;
 
     public Recipe() {
+    }
 
+    public Recipe(String recipe_name, String description) {
+        this.name = recipe_name;
+        this.description = description;
     }
 
     public Long getRecipe_id() {
@@ -37,12 +41,12 @@ public class Recipe {
         this.recipe_id = recipe_id;
     }
 
-    public String getName() {
-        return recipe_name;
+    public String getRecipe_name() {
+        return name;
     }
 
-    public void setName(String name) {
-        this.recipe_name = name;
+    public void setRecipe_name(String recipe_name) {
+        this.name = recipe_name;
     }
 
     public String getDescription() {
@@ -51,5 +55,13 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
