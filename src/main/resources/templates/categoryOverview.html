@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
-    <title>categoryOverview.html</title>
+<head >
+    <th:block th:replace="~{fragments/general :: baseHeader(title='Category')}" />
 </head>
 <body>
 
 <div th:replace="~{fragments/general :: navbar}"></div>
-
-<div class="container">
+    <br>
+    <br>
+<div class="container" style="text-align: center">
+    <h1 >Recipe Category</h1>
+    <br>
+    <p class="lh-sm">Explore a variety of recipe categories!</p>
+    <p class="lh-sm">Whether you want quick snacks, hearty meals, or something special for a big occasion,
+        we have recipes for you.</p>
+    <p class="lh-sm">With easy-to-follow instructions and helpful tips, cooking has never been so simple and enjoyable.</p>
 
 </div>
 

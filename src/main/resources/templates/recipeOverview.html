@@ -59,10 +59,10 @@
         </a>
     </div>
 </div>
-<div class="row gx-3 gy-4" style="margin-left: 50px;">
+<div class="row gx-3 gy-4" style="text-align: center;">
     <h1>Overview recipes</h1>
-    <div class="col-sm-6 col-md-3 mb-4" th:each="recepie : ${allRecipes}">
-        <div class="card h-100" style="width: 70%;">
+    <div class="col-sm-6 col-md-3 mb-4" th:each="recepie : ${allRecipes}" >
+        <div class="card h-100" style="width: 70%; margin-left: 60px">
             <img th:src="${recepie.recipe_name}" class="card-img-top" alt="Recipe Image"
                  style="height: 180px; object-fit: cover;">
             <div class="card-body">
