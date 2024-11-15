@@ -3,10 +3,7 @@ package nl.miwnn.se14.eatwell.model;
 import jakarta.persistence.*;
 import java.util.Set;
 
-/**
- * @author Furkan Altay
- * Purpose for the class
- */
+
 
 @Entity
 public class Category {
@@ -15,7 +12,7 @@ public class Category {
     private Long category_id;
 
     @Column(nullable = false)
-    private String category_name;
+    private String name;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Category",
@@ -36,11 +33,11 @@ public class Category {
     }
 
     public String getCategory_name() {
-        return category_name;
+        return name;
     }
 
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
+    public void setCategory_name(String name) {
+        this.name = name;
     }
 
     public Set<Recipe> getRecipes() {
