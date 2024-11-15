@@ -1,17 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
-    <title>recipeOverview.html</title>
+<head>
+    <th:block th:replace="~{fragments/general :: baseHeader(title='Recipe Overview')}" />
+    <style>
+        .carousel {
+            width: 40%;
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black;
+            border-radius: 50%;
+        }
+
+    </style>
 </head>
 <body>
 
 <div th:replace="~{fragments/general :: navbar}"></div>
 
-<div class="container">
-
+<div class="container d-flex justify-content-center mt-4" >
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" th:src="@{/images/EatWell.png}" alt="First slide">
+                <br>
+                <br>
+                <div class="carousel-caption d-none d-md-block" style="color: black">
+                    <h5>First Slide Title</h5>
+                    <p>First slide description.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" th:src="@{/images/EatWell.png}" alt="Second slide">
+                <br>
+                <br>
+                <div class="carousel-caption d-none d-md-block" style="color: black">
+                    <h5>Second Slide Title</h5>
+                    <p>Second slide description.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" th:src="@{/images/EatWell.png}" alt="Third slide">
+                <br>
+                <br>
+                <div class="carousel-caption d-none d-md-block" style="color: black">
+                    <h5>Third Slide Title</h5>
+                    <p>Third slide description.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
+    </div>
 </div>
-
+<div class="row gx-3 gy-4" style="margin-left: 50px;">
+    <h1>Overview recipes</h1>
+    <div class="col-sm-6 col-md-3 mb-4" th:each="recepie : ${allRecipes}">
+        <div class="card h-100" style="width: 70%;">
+            <img th:src="${recepie.recipe_name}" class="card-img-top" alt="Recipe Image"
+                 style="height: 180px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Title: <span th:text="${recepie.recipe_name}"></span>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    Description: <span th:text="${recepie.description}"></span>
+                </h6>
+            </div>
+            <div class="card-footer">
+                <h6>Link</h6>
+            </div>
+        </div>
+    </div>
+</div>
 <div th:replace="~{fragments/general :: footer}"></div>
+
 <div th:replace="~{fragments/general :: bottomScripts}"></div>
 
 </body>
