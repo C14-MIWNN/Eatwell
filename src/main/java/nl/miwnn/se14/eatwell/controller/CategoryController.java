@@ -17,7 +17,7 @@ public class CategoryController {
     }
 
     @GetMapping({"/category/overview"})
-    private String showRecipeOverview(Model datamodel) {
+    private String showCategoryOverview(Model datamodel) {
         datamodel.addAttribute("allRecipes", recipeRepository.findAll());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
         return "categoryOverview";
