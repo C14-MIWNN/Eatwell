@@ -16,10 +16,12 @@
     <p class="lh-sm">With easy-to-follow instructions and helpful tips, cooking has never been so simple and enjoyable.</p>
 
     <div class="row gx-3 gy-4" style="text-align: center;">
-        <h1>Overview recipes</h1>
+        <h1>Categories</h1>
         <div class="col-sm-6 col-md-3 mb-4" th:each="category : ${allCategories}">
             <div class="card h-100" style="width: 70%; margin-left: 60px">
-                <img th:src="@{/images/{category.category_name}.png}" th:alt="'Category Image'" style="height: 180px; object-fit: cover;">
+                <img th:src="@{'/images/' + ${category.category_name} + '.png'}"
+                     th:alt="'Category Image'"
+                     style="height: 180px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">
                         Title: <span th:text="${category.category_name}"></span>
