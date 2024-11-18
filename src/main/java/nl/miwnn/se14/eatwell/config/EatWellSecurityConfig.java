@@ -23,7 +23,7 @@ public class EatWellSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/recipe/overview").permitAll()
+                        .requestMatchers("/", "/recipe/overview", "category/overview").permitAll()
                         .requestMatchers("/webjars/**", "/css/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
