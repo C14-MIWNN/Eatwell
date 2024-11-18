@@ -1,6 +1,7 @@
 package nl.miwnn.se14.eatwell.controller;
 
 import nl.miwnn.se14.eatwell.model.EatWellUser;
+import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -31,7 +32,12 @@ public class InitializeController {
     }
 
     private void initializeDB(){
-    makeEatWellUser("user","password");
+    makeRecipeCategory("Breakfast", "Text");
+    makeRecipeCategory("Vegan", "Text");
+    makeRecipeCategory("Meats", "Text");
+    makeRecipeCategory("Desserts", "Text");
+    makeRecipeCategory("Appetizers", "Text");
+
     }
 
 
@@ -40,5 +46,13 @@ public class InitializeController {
         user.setUsername(username);
         user.setPassword(password);
         eatWellUserService.save(user);
+    }
+
+    private void  makeRecipeCategory(String name, String description){
+        Recipe recipe = new Recipe();
+        recipe.setRecipe_name(name);
+        recipe.setDescription(description);
+        recipeRepository.save(recipe);
+
     }
 }
