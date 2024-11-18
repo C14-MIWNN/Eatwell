@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface EatWellUserRepository extends JpaRepository<EatWellUser, Long> {
     Optional<EatWellUser> findByUsername(String username);
+
+    boolean existsByUsername(String username);
 }
