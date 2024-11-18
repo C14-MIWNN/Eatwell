@@ -2,8 +2,11 @@ package nl.miwnn.se14.eatwell.controller;
 
 import nl.miwnn.se14.eatwell.model.Category;
 import nl.miwnn.se14.eatwell.model.EatWellUser;
+<<<<<<< HEAD
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
+=======
+>>>>>>> cfbf753eb87f8c6167d7602a82d162f792b187c8
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -36,6 +39,10 @@ public class InitializeController {
     }
 
     private void initializeDB(){
+<<<<<<< HEAD
+=======
+
+>>>>>>> cfbf753eb87f8c6167d7602a82d162f792b187c8
     }
 
 
@@ -45,10 +52,13 @@ public class InitializeController {
         user.setPassword(password);
         eatWellUserService.save(user);
     }
+<<<<<<< HEAD
 
     private void  makeCategory(String name){
         Category category = new Category();
         category.setCategory_name(name);
         categoryRepository.save(category);
     }
+=======
+>>>>>>> cfbf753eb87f8c6167d7602a82d162f792b187c8
 }
