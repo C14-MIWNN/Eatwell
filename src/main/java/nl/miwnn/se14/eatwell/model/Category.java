@@ -20,10 +20,6 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipes;
 
-
-    public Category() {
-    }
-
     public Long getCategory_id() {
         return category_id;
     }
@@ -37,7 +33,7 @@ public class Category {
     }
 
     public void setCategory_name(String name) {
-        this.categoryName = categoryName;
+        this.categoryName = name;
     }
 
     public Set<Recipe> getRecipes() {
