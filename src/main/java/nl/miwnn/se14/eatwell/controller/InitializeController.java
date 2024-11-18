@@ -31,7 +31,7 @@ public class InitializeController {
     }
 
     private void initializeDB(){
-    makeEatWellUser("user","password");
+
     }
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:fragment="baseHeader(title)">
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
@@ -24,8 +24,11 @@
             </ul>
 
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <h5 class="text-white">Log out account</h5>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/logout}">Logout <span sec:authentication="name"></span></a>
                 </li>
             </ul>
         </div>
