@@ -11,8 +11,8 @@ public class Category {
     @GeneratedValue
     private Long category_id;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(nullable = false, name = "category_name")
+    private String categoryName;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Category",
@@ -33,11 +33,11 @@ public class Category {
     }
 
     public String getCategory_name() {
-        return name;
+        return categoryName;
     }
 
     public void setCategory_name(String name) {
-        this.name = name;
+        this.categoryName = categoryName;
     }
 
     public Set<Recipe> getRecipes() {
