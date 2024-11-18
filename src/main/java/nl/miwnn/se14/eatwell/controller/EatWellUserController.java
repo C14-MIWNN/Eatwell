@@ -4,7 +4,10 @@ import nl.miwnn.se14.eatwell.model.EatWellUser;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -27,5 +30,15 @@ public class EatWellUserController {
         datamodel.addAttribute("formUser", new EatWellUser());
 
         return "userOverview";
+    }
+
+    @PostMapping("/save")
+    private String saveOrUpdateUser(@ModelAttribute("formUser") EatWellUser userToBeSaved, BindingResult result) {
+        if (result.hasErrors()) {
+            return "userOverview";
+        }
+
+        eatWellUserService.save(userToBeSaved);
+        return "redirect:/user/overview";
     }
 }
