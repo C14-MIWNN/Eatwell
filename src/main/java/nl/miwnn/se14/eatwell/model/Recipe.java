@@ -43,6 +43,10 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "unit_id"))
     private Set<Unit> units;
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "instruction_id" ,referencedColumnName = "instructions_id",  unique = true)
+    private Instructions instructions;
+
 
     public Recipe() {
     }
