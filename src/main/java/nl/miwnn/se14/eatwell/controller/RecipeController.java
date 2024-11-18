@@ -19,7 +19,7 @@ public class RecipeController {
         this.recipeRepository = recipeRepository;
     }
 
-    @GetMapping({"/recipe/overview"})
+    @GetMapping({"/","/recipe/overview"})
     private String showRecipeOverview(Model datamodel) {
         datamodel.addAttribute("allRecipes", recipeRepository.findAll());
         return "recipeOverview";
