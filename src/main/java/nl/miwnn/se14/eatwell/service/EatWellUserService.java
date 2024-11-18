@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * @author Bart Molenaars
@@ -38,5 +40,9 @@ public class EatWellUserService implements UserDetailsService {
     public void save(EatWellUser user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         eatWellUserRepository.save(user);
+    }
+
+    public List<EatWellUser> getAllUsers() {
+        return eatWellUserRepository.findAll();
     }
 }
