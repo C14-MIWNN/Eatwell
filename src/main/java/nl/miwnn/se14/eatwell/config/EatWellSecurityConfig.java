@@ -24,7 +24,7 @@ public class EatWellSecurityConfig {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/recipe/overview").permitAll()
-                        .requestMatchers("/webjars/**", "/css/**").permitAll()
+                        .requestMatchers("/webjars/**", "/css/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
