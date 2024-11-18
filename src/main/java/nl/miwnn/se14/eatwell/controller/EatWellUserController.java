@@ -39,7 +39,6 @@ public class EatWellUserController {
 
     @PostMapping("/save")
     private String saveOrUpdateUser(@ModelAttribute("formUser") @Valid EatWellUserDTO userDtoToBeSaved,
-                                    EatWellUser userToBeSaved,
                                     BindingResult result,
                                     Model datamodel) {
         ;
@@ -47,7 +46,7 @@ public class EatWellUserController {
             result.rejectValue("username", "duplicate", "This username is not available");
         }
 
-        if (!userDtoToBeSaved.getPassword().equals((userDtoToBeSaved.getPasswordConfirm()))){
+        if (!userDtoToBeSaved.getPassword().equals(userDtoToBeSaved.getPasswordConfirm())){
             result.rejectValue("password", "no.match", "The passwords do not match");
         }
 
@@ -57,7 +56,7 @@ public class EatWellUserController {
             return "userOverview";
         }
 
-        eatWellUserService.save(userToBeSaved);
+        eatWellUserService.save(userDtoToBeSaved);
         return "redirect:/user/overview";
     }
 }

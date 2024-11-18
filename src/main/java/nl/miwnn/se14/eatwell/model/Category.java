@@ -20,10 +20,6 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipes;
 
-
-    public Category() {
-    }
-
     public Long getCategory_id() {
         return category_id;
     }
