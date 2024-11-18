@@ -8,10 +8,10 @@ import java.util.Set;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long category_id;
 
-    @Column(nullable = false, name = "category_name")
+    @Column( nullable = false, name = "category_name")
     private String categoryName;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
@@ -37,7 +37,7 @@ public class Category {
     }
 
     public void setCategory_name(String name) {
-        this.categoryName = categoryName;
+        this.categoryName = name;
     }
 
     public Set<Recipe> getRecipes() {

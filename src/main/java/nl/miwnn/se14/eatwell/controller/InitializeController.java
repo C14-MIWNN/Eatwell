@@ -37,7 +37,7 @@ public class InitializeController {
     }
 
     private void initializeDB(){
-
+        makeRecipe("Soup","Voorbeeld");
     }
 
 
@@ -53,4 +53,13 @@ public class InitializeController {
         category.setCategory_name(name);
         categoryRepository.save(category);
     }
+
+    private void  makeRecipe(String name, String description){
+        Recipe recipe = new Recipe();
+        recipe.setRecipe_name(name);
+        recipe.setDescription(description);
+        recipeRepository.save(recipe);
+    }
+
+
 }
