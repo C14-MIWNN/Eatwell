@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RecipeController {
     private final RecipeRepository recipeRepository;
 
+
     public RecipeController(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
