@@ -37,6 +37,12 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "quantity_id"))
     private Set<Quantity> quantities;
 
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinTable(name = "Recipe_Ingredient",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "unit_id"))
+    private Set<Unit> units;
+
 
     public Recipe() {
     }
