@@ -37,7 +37,7 @@ public class InitializeController {
     }
 
     private void initializeDB(){
-        
+
     }
 
 
@@ -60,6 +60,4 @@ public class InitializeController {
         recipe.setDescription(description);
         recipeRepository.save(recipe);
     }
-
-
 }
