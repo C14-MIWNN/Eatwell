@@ -8,19 +8,11 @@
 <div th:replace="~{fragments/general :: navbar}"></div>
 
 <div class="container">
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     <h1>Create a new recipe</h1>
 
     <form class="row g-3" th:action="@{/recipe/new}" method="post" th:object="${newRecipe}">
         <input type="hidden" th:field="*{recipe_id}">
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 
         <div class="row g-3 align-items-center">
             <div class="col-1">
@@ -50,26 +42,27 @@
             </div>
         </div>
 
+
         <div class="row g-3 align-items-center">
             <div class="col-1">
-                <label for="description" class="col-form-label">Description</label>
+                <label for="ingredients" class="col-form-label">Ingredient</label>
             </div>
             <div class="col-5">
-                <input type="text" id="description" class="form-control"
-                       th:field="*{description}" aria-describedby="descriptionHelpInline">
+                <input type="text" id="ingredients" class="form-control"
+                       th:field="*{ingredients}" aria-describedby="ingredientsHelpInline">
             </div>
             <div class="col-6">
-                <span id="decriptionHelpInline" class="form-text">
+                <span id="ingredientsHelpInline" class="form-text">
                 </span>
             </div>
         </div>
 
         <div class="row g-3 align-items-center">
             <div class="col-1">
-                <label for="colors" class="col-form-label">Category</label>
+                <label for="categories" class="col-form-label">Category</label>
             </div>
             <div class="col-3">
-                <select id="colors" class="form-select"
+                <select id="categories" class="form-select"
                         th:field="*{categories}" aria-describedby="categoriesHelpInline" multiple>
                     <option th:each="categoryOption : ${allCategories}"
                             th:text="${categoryOption.category_name}"
