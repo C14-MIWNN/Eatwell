@@ -8,10 +8,23 @@
 <div th:replace="~{fragments/general :: navbar}"></div>
 
 <div class="container">
+<<<<<<< HEAD
+    <h1>Add Recipe</h1>
+    <form th:action="@{/recipes/add}" th:object="${newRecipe}" method="post">
+        <input type="hidden" th:field="*{recipe_id}">
+        <label for="recipeName">Recipe Name:</label>
+        <input type="text" id="recipeName" th:field="*{recipe_name}"  />
+        <input type="text" id="" th:field="*{recipe_name}"  />
+
+
+        <button type="submit">Save Recipe</button>
+    </form>
+=======
     <h1>Create a new recipe</h1>
 
     <form class="row g-3" th:action="@{/recipe/new}" method="post" th:object="${newRecipe}">
         <input type="hidden" th:field="*{recipe_id}">
+>>>>>>> 74e8b4430e1fa5499aea49a97ead0b1c09e66224
 
 
         <div class="row g-3 align-items-center">
