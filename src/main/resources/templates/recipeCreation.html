@@ -8,23 +8,12 @@
 <div th:replace="~{fragments/general :: navbar}"></div>
 
 <div class="container">
-<<<<<<< HEAD
-    <h1>Add Recipe</h1>
-    <form th:action="@{/recipes/add}" th:object="${newRecipe}" method="post">
-        <input type="hidden" th:field="*{recipe_id}">
-        <label for="recipeName">Recipe Name:</label>
-        <input type="text" id="recipeName" th:field="*{recipe_name}"  />
-        <input type="text" id="" th:field="*{recipe_name}"  />
 
-
-        <button type="submit">Save Recipe</button>
-    </form>
-=======
     <h1>Create a new recipe</h1>
 
     <form class="row g-3" th:action="@{/recipe/new}" method="post" th:object="${newRecipe}">
         <input type="hidden" th:field="*{recipe_id}">
->>>>>>> 74e8b4430e1fa5499aea49a97ead0b1c09e66224
+
 
 
         <div class="row g-3 align-items-center">
@@ -32,7 +21,8 @@
                 <label for="name" class="col-form-label">Recipe Name</label>
             </div>
             <div class="col-5">
-                <input type="text" id="name" class="form-control" th:field="*{recipe_name}" aria-describedby="nameHelpInline">
+                <input type="text" id="name" class="form-control"
+                       th:field="*{recipe_name}" aria-describedby="nameHelpInline">
             </div>
             <div class="col-6">
                 <span id="nameHelpInline" class="form-text">
@@ -42,13 +32,28 @@
 
         <div class="row g-3 align-items-center">
             <div class="col-1">
-                <label for="foundingYear" class="col-form-label">Description</label>
+                <label for="description" class="col-form-label">Description</label>
             </div>
             <div class="col-5">
-                <input type="text" id="foundingYear" class="form-control" th:field="*{description}" aria-describedby="foundingYearHelpInline">
+                <input type="text" id="description" class="form-control"
+                       th:field="*{description}" aria-describedby="descriptionHelpInline">
             </div>
             <div class="col-6">
-                <span id="foundingYearHelpInline" class="form-text">
+                <span id="decriptionHelpInline" class="form-text">
+                </span>
+            </div>
+        </div>
+
+        <div class="row g-3 align-items-center">
+            <div class="col-1">
+                <label for="description" class="col-form-label">Description</label>
+            </div>
+            <div class="col-5">
+                <input type="text" id="description" class="form-control"
+                       th:field="*{description}" aria-describedby="descriptionHelpInline">
+            </div>
+            <div class="col-6">
+                <span id="decriptionHelpInline" class="form-text">
                 </span>
             </div>
         </div>
@@ -58,7 +63,8 @@
                 <label for="colors" class="col-form-label">Category</label>
             </div>
             <div class="col-3">
-                <select id="colors" class="form-select" th:field="*{categories}" aria-describedby="colorsHelpInline" multiple>
+                <select id="colors" class="form-select"
+                        th:field="*{categories}" aria-describedby="categoriesHelpInline" multiple>
                     <option th:each="categoryOption : ${allCategories}"
                             th:text="${categoryOption.category_name}"
                             th:value="${categoryOption.category_id}">
@@ -66,7 +72,7 @@
                 </select>
             </div>
             <div class="col-6">
-                <span id="colorsHelpInline" class="form-text">
+                <span id="categoriesHelpInline" class="form-text">
                 </span>
             </div>
         </div>

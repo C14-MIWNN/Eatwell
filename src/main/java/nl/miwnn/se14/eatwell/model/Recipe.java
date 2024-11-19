@@ -88,4 +88,44 @@ public class Recipe {
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Set<Quantity> getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(Set<Quantity> quantities) {
+        this.quantities = quantities;
+    }
+
+    public Set<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(Set<Unit> units) {
+        this.units = units;
+    }
+
+    public Instructions getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(Instructions instructions) {
+        this.instructions = instructions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
