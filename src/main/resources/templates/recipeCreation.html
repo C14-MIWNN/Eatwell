@@ -47,7 +47,7 @@
             <div class="col-3">
                 <select id="colors" class="form-select" th:field="*{categories}" aria-describedby="colorsHelpInline" multiple>
                     <option th:each="categoryOption : ${allCategories}"
-                            th:text="${categoryOption.name}"
+                            th:text="${categoryOption.category_name}"
                             th:value="${categoryOption.category_id}">
                     </option>
                 </select>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="col-4">
-            <button type="submit" class="btn btn-outline-primary">Save Football Club</button>
+            <button type="submit" class="btn btn-outline-primary">Save Recipe</button>
         </div>
     </form>
 </div>
