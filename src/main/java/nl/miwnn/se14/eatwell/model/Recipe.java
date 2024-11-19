@@ -89,6 +89,7 @@ public class Recipe {
         this.categories = categories;
     }
 
+<<<<<<< Updated upstream
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -128,4 +129,9 @@ public class Recipe {
     public void setName(String name) {
         this.name = name;
     }
+=======
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+>>>>>>> Stashed changes
 }
