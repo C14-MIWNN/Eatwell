@@ -34,7 +34,7 @@ public class RecipeController {
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
         return "recipeCreation";
     }
-    
+
     @PostMapping({"/recipe/new"})
     private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
