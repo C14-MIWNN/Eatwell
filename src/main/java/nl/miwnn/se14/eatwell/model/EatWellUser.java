@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author Bart Molenaars
- * People able to login to EatWell application.
+ * People that are able to login to the EatWell application.
  */
 
 @Entity
