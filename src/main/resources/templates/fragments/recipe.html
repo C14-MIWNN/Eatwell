@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<body>
+
+<div th:fragment="recipeForm(formRecipe, #fields)">
+    <form action="#" th:action="@{/recipe/save}" th:object="${formRecipe}"
+          method="post">
+        <fieldset>
+            <input type="submit" id="submitButton" th:value="Save">
+            <input type="reset" id="resetButton" name="reset" th:value="Reset"/>
+            <table>
+                <thead>
+                <tr>
+                    <th> Ingredient</th>
+                    <th> Unit</th>
+                    <th> Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="recipe, itemStat : *{newRecipe}">
+                    <td><input th:field="*{recipes[__${itemStat.index}__].ingredient}" /></td>
+                    <td><input th:field="*{recipes[__${itemStat.index}__].unit}" /></td>
+                    <td><input th:field="*{recipes[__${itemStat.index}__].amount}" /></td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+
+
+
+
+</div>
+
+<div class="container">
+
+</div>
+
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
+
+</body>
+</html>
