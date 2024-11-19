@@ -1,12 +1,15 @@
 package nl.miwnn.se14.eatwell.model;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 /**
  * @author Furkan Altay
  *
  */
+
 @Entity
 public class Recipe {
     @Id
@@ -29,13 +32,13 @@ public class Recipe {
     @JoinTable(name = "Recipe_Ingredient",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private Set<Ingredient> ingredients;
+    private List<Ingredient> ingredients;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Ingredient",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "quantity_id"))
-    private Set<Quantity> quantities;
+    private List<Quantity> quantities;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Ingredient",
@@ -89,19 +92,19 @@ public class Recipe {
         this.categories = categories;
     }
 
-    public Set<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public Set<Quantity> getQuantities() {
+    public List<Quantity> getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(Set<Quantity> quantities) {
+    public void setQuantities(List<Quantity> quantities) {
         this.quantities = quantities;
     }
 
