@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <body>
 
-<div th: th:fragment="recipeForm(recipes)">
-    <form action="#" th:action="@{/recipe/save}" th:object="${form}"
+<div th:fragment="recipeForm(formRecipe, #fields)">
+    <form action="#" th:action="@{/recipe/save}" th:object="${formRecipe}"
           method="post">
         <fieldset>
             <input type="submit" id="submitButton" th:value="Save">
@@ -12,13 +12,15 @@
                 <thead>
                 <tr>
                     <th> Ingredient</th>
+                    <th> Unit</th>
                     <th> Amount</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="book, itemStat : *{books}">
-                    <td><input th:field="*{books[__${itemStat.index}__].title}" /></td>
-                    <td><input th:field="*{books[__${itemStat.index}__].author}" /></td>
+                <tr th:each="recipe, itemStat : *{newRecipe}">
+                    <td><input th:field="*{recipes[__${itemStat.index}__].ingredient}" /></td>
+                    <td><input th:field="*{recipes[__${itemStat.index}__].unit}" /></td>
+                    <td><input th:field="*{recipes[__${itemStat.index}__].amount}" /></td>
                 </tr>
                 </tbody>
             </table>
