@@ -48,4 +48,16 @@ public class RecipeController {
         return "recipeOverview";
     }
 
+    @GetMapping("/surpriseMe")
+    public String showSurprise(Model datamodel) {
+        Recipe randomRecipe = recipeRepository.findAll()
+                .stream()
+                .findAny()
+                .orElse(null);
+
+        datamodel.addAttribute("r", randomRecipe);
+        datamodel.addAttribute("fields", randomRecipe.getIngredients());
+        return "surpriseMe";
+    }
+
 }
