@@ -15,11 +15,11 @@ import java.util.Optional;
 
 /**
   * @author Bart Molenaars
-  * Purpose for the class
+  * Add new ingredients to a recipe.
   */
 
 @Controller
-@RequestMapping("/ingredient")
+@RequestMapping("/recipe")
 public class IngredientController {
     private final IngredientRepository ingredientRepository;
 
@@ -27,7 +27,7 @@ public class IngredientController {
         this.ingredientRepository = ingredientRepository;
     }
 
-    @GetMapping("/new")
+    @GetMapping("/ingredient/overview")
     private String showIngredientOverview(Model datamodel) {
         datamodel.addAttribute("allIngredients", ingredientRepository.findAll());
         datamodel.addAttribute("formIngredient", new Ingredient());
@@ -36,9 +36,9 @@ public class IngredientController {
         return "recipeCreation";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/add/ingredient")
     private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
-                                          BindingResult result) {
+                                          BindingResult result, Model datamodel) {
         Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
         if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
             result.addError(new FieldError("formIngredient",
@@ -47,6 +47,7 @@ public class IngredientController {
         }
 
         if (result.hasErrors()){
+            datamodel.addAttribute("formModalHidden", false);
             return "ingredientForm";
         }
 
