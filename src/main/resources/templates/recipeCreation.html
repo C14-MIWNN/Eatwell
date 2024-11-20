@@ -29,6 +29,20 @@
         </div>
 
         <div class="row g-3 align-items-center">
+        <div class="col-1">
+            <label for="description" class="col-form-label">Description</label>
+        </div>
+        <div class="col-5">
+            <input type="text" id="description" class="form-control"
+                   th:field="*{description}" aria-describedby="descriptionHelpInline">
+        </div>
+        <div class="col-6">
+                <span id="decriptionHelpInline" class="form-text">
+                </span>
+        </div>
+    </div>
+
+        <div class="row g-3 align-items-center">
             <div class="col-1">
                 <label for="description" class="col-form-label">Description</label>
             </div>
@@ -42,19 +56,34 @@
             </div>
         </div>
 
+        <div class="table-responsive">
+            <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Ingredient</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit</th>
 
-        <div class="row g-3 align-items-center">
-            <div class="col-1">
-                <label for="ingredients" class="col-form-label">Ingredient</label>
-            </div>
-            <div class="col-5">
-                <input type="text" id="ingredients" class="form-control"
-                       th:field="*{ingredients}" aria-describedby="ingredientsHelpInline">
-            </div>
-            <div class="col-6">
-                <span id="ingredientsHelpInline" class="form-text">
-                </span>
-            </div>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Cheese</td>
+                <td>400</td>
+                <td>gram</td>
+            </tr>
+            <tr>
+                <td>Ham</td>
+                <td>400</td>
+                <td>gram</td>
+            </tr>
+            <tr>
+                <td>Butter</td>
+                <td>50</td>
+                <td>gram</td>
+            </tr>
+            </tbody>
+        </table>
         </div>
 
         <div class="row g-3 align-items-center">
@@ -83,5 +112,6 @@
 
 <div th:replace="~{fragments/general :: footer}"></div>
 <div th:replace="~{fragments/general :: bottomScripts}"></div>
+
 </body>
 </html>
