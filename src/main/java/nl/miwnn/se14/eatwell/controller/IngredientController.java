@@ -19,7 +19,7 @@ import java.util.Optional;
   */
 
 @Controller
-@RequestMapping("/recipe")
+@RequestMapping("/ingredient")
 public class IngredientController {
     private final IngredientRepository ingredientRepository;
 
@@ -36,7 +36,7 @@ public class IngredientController {
         return "recipeCreation";
     }
 
-    @PostMapping("/saveingredient")
+    @PostMapping("/save")
     private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
                                           BindingResult result) {
         Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
