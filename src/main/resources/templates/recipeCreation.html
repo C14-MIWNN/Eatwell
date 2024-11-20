@@ -44,17 +44,42 @@
 
 
         <div class="row g-3 align-items-center">
-            <div class="col-1">
-                <label for="ingredients" class="col-form-label">Ingredient</label>
-            </div>
-            <div class="col-5">
-                <input type="text" id="ingredients" class="form-control"
-                       th:field="*{ingredients}" aria-describedby="ingredientsHelpInline">
-            </div>
-            <div class="col-6">
-                <span id="ingredientsHelpInline" class="form-text">
-                </span>
-            </div>
+            <form th:action="@{/ingredient/save}" method="post" th:object="${formIngredient}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><label for="name">Name</label></th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="ingredient : ${allIngredients}">
+                        <td>
+
+                            <a th:href="@{/ingredient/detail/{ingredientName}(ingredientName=${ingredient.name})}"
+                               th:text="${ingredient.name}"></a>
+                        </td>
+                        <td>
+                            <a th:href="@{/ingredient/edit/{ingredientName}(ingredientName=${ingredient.name})}">Edit
+                            </a>
+                            <a th:href="@{/ingredient/delete/{ingredientName}(ingredientName=${ingredient.name})}"
+                               onclick="return confirm('Are you sure you want to delete this ingredient?');">Delete</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input id="newIngredientName" type="text" th:field="*{ingredientName}"
+                                   placeholder="Enter ingredient name" />
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>
 
         <div class="row g-3 align-items-center">

@@ -19,4 +19,19 @@ public class Ingredient {
             inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipes;
 
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
+    public Long getIngredient_id() {
+        return ingredient_id;
+    }
+
+    public void setIngredient_id(Long ingredient_id) {
+        this.ingredient_id = ingredient_id;
+    }
 }
