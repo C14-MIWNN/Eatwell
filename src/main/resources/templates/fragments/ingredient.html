@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
+    <title>ingredient.html</title>
+</head>
+<body>
+
+<div th:fragment="newIngredientForm(formIngredient, #fields)">
+    <form class="row g-3" th:action="@{/ingredient/save}" method="post" th:object="${formIngredient}">
+        <div class="row g-3 align-items-center">
+            <div class="col-5">
+                <label for="ingredientName" class="col-form-label">Ingredient name</label>
+            </div>
+            <div class="col-7">
+                <input type="text" id="ingredientName" class="form-control" aria-describedby="ingredientNameHelpInline"
+                       th:field="*{ingredientname}">
+            </div>
+            <div class="col-12">
+                <span id="ingredientNameHelpInline" class="form-text" th:if="${#fields.hasErrors('ingredientName')}"
+                      th:errors="*{ingredientName}"></span>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-5">
+                <label for="unit" class="col-form-label">Unit</label>
+            </div>
+            <div class="col-7">
+                <input type="text" id="unit" class="form-control" aria-describedby="unitHelpInline" th:field="*{unit}">
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div th:fragment="ingredientFormModal(formIngredient, #fields)" class="modal fade" id="newForm" tabindex="-1"
+             aria-labelledby="newFormModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <h1 class="modal-title text-center" id="editFormModalLabel">New ingredient</h1>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div th:replace="~{:: newIngredientForm(${formIngredient}, ${#fields})}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script th:unless="${formModalHidden}">
+                new bootstrap.Modal(document.getElementById('newForm'), {}).toggle()
+            </script>
+        </div>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -18,7 +19,7 @@ import java.util.Optional;
   */
 
 @Controller
-@RequestMapping("/ingredient")
+@RequestMapping("/recipe")
 public class IngredientController {
     private final IngredientRepository ingredientRepository;
 
@@ -26,14 +27,16 @@ public class IngredientController {
         this.ingredientRepository = ingredientRepository;
     }
 
-    @GetMapping("/overview")
+    @GetMapping("/new")
     private String showIngredientOverview(Model datamodel) {
         datamodel.addAttribute("allIngredients", ingredientRepository.findAll());
         datamodel.addAttribute("formIngredient", new Ingredient());
+        datamodel.addAttribute("formModalHidden", true);
 
-        return "ingredientOverview";
+        return "recipeCreation";
     }
 
+    @PostMapping("/saveingredient")
     private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
                                           BindingResult result) {
         Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
@@ -48,7 +51,7 @@ public class IngredientController {
         }
 
         ingredientRepository.save(ingredient);
-        return "redirect:/ingredient/overview";
+        return "redirect:/recipe/new";
     }
 
 }

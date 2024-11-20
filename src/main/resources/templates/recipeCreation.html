@@ -29,6 +29,20 @@
         </div>
 
         <div class="row g-3 align-items-center">
+        <div class="col-1">
+            <label for="description" class="col-form-label">Description</label>
+        </div>
+        <div class="col-5">
+            <input type="text" id="description" class="form-control"
+                   th:field="*{description}" aria-describedby="descriptionHelpInline">
+        </div>
+        <div class="col-6">
+                <span id="decriptionHelpInline" class="form-text">
+                </span>
+        </div>
+    </div>
+
+        <div class="row g-3 align-items-center">
             <div class="col-1">
                 <label for="description" class="col-form-label">Description</label>
             </div>
@@ -42,44 +56,34 @@
             </div>
         </div>
 
+        <div class="table-responsive">
+            <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Ingredient</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit</th>
 
-        <div class="row g-3 align-items-center">
-            <form th:action="@{/ingredient/save}" method="post" th:object="${formIngredient}">
-                <table>
-                    <thead>
-                    <tr>
-                        <th><label for="name">Name</label></th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr th:each="ingredient : ${allIngredients}">
-                        <td>
-
-                            <a th:href="@{/ingredient/detail/{ingredientName}(ingredientName=${ingredient.name})}"
-                               th:text="${ingredient.name}"></a>
-                        </td>
-                        <td>
-                            <a th:href="@{/ingredient/edit/{ingredientName}(ingredientName=${ingredient.name})}">Edit
-                            </a>
-                            <a th:href="@{/ingredient/delete/{ingredientName}(ingredientName=${ingredient.name})}"
-                               onclick="return confirm('Are you sure you want to delete this ingredient?');">Delete</a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <input id="newIngredientName" type="text" th:field="*{ingredientName}"
-                                   placeholder="Enter ingredient name" />
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </form>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Cheese</td>
+                <td>400</td>
+                <td>gram</td>
+            </tr>
+            <tr>
+                <td>Ham</td>
+                <td>400</td>
+                <td>gram</td>
+            </tr>
+            <tr>
+                <td>Butter</td>
+                <td>50</td>
+                <td>gram</td>
+            </tr>
+            </tbody>
+        </table>
         </div>
 
         <div class="row g-3 align-items-center">
@@ -108,5 +112,6 @@
 
 <div th:replace="~{fragments/general :: footer}"></div>
 <div th:replace="~{fragments/general :: bottomScripts}"></div>
+
 </body>
 </html>
