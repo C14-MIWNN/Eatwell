@@ -65,7 +65,7 @@
                 <select id="categories" class="form-select"
                         th:field="*{categories}" aria-describedby="categoriesHelpInline" multiple>
                     <option th:each="categoryOption : ${allCategories}"
-                            th:text="${categoryOption.category_name}"
+                            th:text="${categoryOption.categoryName}"
                             th:value="${categoryOption.category_id}">
                     </option>
                 </select>

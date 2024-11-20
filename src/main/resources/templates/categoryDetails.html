@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Details</title>
+</head>
+<body>
+
+<!-- Display category name -->
+<h1>Category: <span th:text="${category.categoryName}">Category Name</span></h1>
+
+<!-- Link to category overview -->
+<a href="/category/overview">Back to Category Overview</a>
+
+<!-- Display associated recipes -->
+<h2>Associated Recipes:</h2>
+<ul>
+    <li th:each="recipe : ${category.recipes}">
+        <span th:text="${recipe.name}">Recipe Name</span>
+    </li>
+    <li th:if="${#lists.isEmpty(category.recipes)}">No recipes available</li>
+</ul>
+
+<!-- Display category ID -->
+<footer>
+    <p>Category ID: <span th:text="${category.category_id}">Category ID</span></p>
+</footer>
+
+</body>
+</html>
