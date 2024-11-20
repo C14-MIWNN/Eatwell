@@ -27,12 +27,12 @@ public class CategoryController {
         return "categoryOverview";
     }
 
-    @GetMapping("/category/{name}")
-    public String showCategoryDetails(@PathVariable("name") String name, Model datamodel) {
-        Optional<Category> categoryOptional = categoryRepository.findByCategoryName(name);
+    @GetMapping("/category/{categoryName}")
+    public String showCategoryDetails(@PathVariable("categoryName") String categoryName, Model datamodel) {
+        Optional<Category> categoryOptional = categoryRepository.findByCategoryName(categoryName);
 
         if (categoryOptional.isEmpty()) {
-            return "redirect:/category/overview";
+            return "categoryDetails";
         }
 
         datamodel.addAttribute("category", categoryOptional.get());

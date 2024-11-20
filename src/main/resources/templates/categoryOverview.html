@@ -24,7 +24,7 @@
                      style="height: 180px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a th:href="@{/category/${category.categoryName}}" th:text="${category.categoryName}"></a>
+                        <a th:href="@{/category/{name}(name=${category.categoryName})}" th:text="${category.categoryName}"></a>
                     </h5>
                 </div>
                 <div class="card-footer">
