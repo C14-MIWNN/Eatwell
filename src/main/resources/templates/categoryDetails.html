@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
+    <title th:text="|${category.categoryName} details|"></title>
+</head>
+<body>
+
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container d-flex justify-content-center mt-4">
+    <div class="row gx-3 gy-4" style="text-align: center;">
+    <h1 th:text="|${category.categoryName}|">Category Name</h1>
+    <div>
+        <div class="row justify-content-center">
+
+            <div class="col-sm-6 col-md-3 mb-4" th:each="recipe : ${category.recipes}">
+                <div class="card h-100" style="width: 100%; margin-left: auto; margin-right: auto;">
+                    <img th:src="${recipe.recipe_name}" class="card-img-top" alt="Recipe Image"
+                         style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Title: <span th:text="${recipe.recipe_name}"></span>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            Description: <span th:text="${recipe.description}"></span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <footer>
+            <a th:href="@{/category/overview}">Back to Category Overview</a>
+        </footer>
+    </div>
+</div>
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
+
+</body>
+</html>
