@@ -36,7 +36,6 @@ public class CategoryController {
             return "categoryDetails";
         }
 
-
         datamodel.addAttribute("category", categoryOptional.get());
         return "categoryDetails";
     }

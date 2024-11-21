@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
@@ -67,6 +68,17 @@ public class RecipeController {
         datamodel.addAttribute("r", randomRecipe);
         datamodel.addAttribute("fields", randomRecipe.getIngredients());
         return "surpriseMe";
+    }
+
+    @GetMapping({"/recipe/{recipeName}"})
+    private String showRecipeDetails(@PathVariable("recipeName") String recipeNaam, Model datamodel)  {
+        Optional<Recipe> recipeOptional = recipeRepository.findByName(recipeNaam);
+
+        if(recipeOptional.isEmpty()) {
+            return "recipeOverview";
+        }
+        datamodel.addAttribute("recipe", recipeOptional.get());
+        return "recipeDetails";
     }
 
 }

@@ -19,7 +19,8 @@
                          style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">
-                            Title: <span th:text="${recipe.recipe_name}"></span>
+                            Title:<a th:href="@{/recipe/{recipe_name}(recipe_name=${recipe.recipe_name})}" th:text="${recipe.recipe_name}"></a>
+
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             Description: <span th:text="${recipe.description}"></span>
