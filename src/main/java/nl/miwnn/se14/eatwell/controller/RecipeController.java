@@ -27,6 +27,7 @@ public class RecipeController {
     private final CategoryRepository categoryRepository;
     private final IngredientRepository ingredientRepository;
 
+
     public RecipeController(RecipeRepository recipeRepository,
                             CategoryRepository categoryRepository,
                             IngredientRepository ingredientRepository) {
@@ -72,6 +73,7 @@ public class RecipeController {
         return "surpriseMe";
     }
 
+
     @GetMapping({"/recipe/{recipeName}"})
     private String showRecipeDetails(@PathVariable("recipeName") String recipeNaam, Model datamodel)  {
         Optional<Recipe> recipeOptional = recipeRepository.findByName(recipeNaam);
@@ -97,6 +99,7 @@ public class RecipeController {
             datamodel.addAttribute("formModalHidden", false);
             return "recipeCreation";
         }
+
         ingredientRepository.save(ingredient);
         return "redirect:/recipe/new";
     }

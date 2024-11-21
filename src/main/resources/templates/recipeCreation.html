@@ -50,32 +50,22 @@
         </div>
         <div class="table-responsive">
             <table class="table table-sm">
-            <thead>
-            <tr>
-                <th scope="col">Ingredient</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Unit</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Cheese</td>
-                <td>400</td>
-                <td>gram</td>
-            </tr>
-            <tr>
-                <td>Ham</td>
-                <td>400</td>
-                <td>gram</td>
-            </tr>
-            <tr>
-                <td>Butter</td>
-                <td>50</td>
-                <td>gram</td>
-            </tr>
-            </tbody>
-        </table>
+                <thead>
+                    <tr >
+                        <th scope="col">Ingredient</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ingredient : ${allIngredients}">
+                        <td>
+                            <a th:href="@{/ingredient/detail/{ingredientName}(ingredientName =${ingredient.ingredientName})}"
+                               th:text="${ingredient.ingredientName}"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="row g-3 align-items-center">

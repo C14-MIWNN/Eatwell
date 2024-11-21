@@ -38,7 +38,7 @@ public class EatWellUserController {
     private String saveOrUpdateUser(@ModelAttribute("formUser") @Valid EatWellUserDTO userDtoToBeSaved,
                                     BindingResult result,
                                     Model datamodel) {
-        ;
+
         if (eatWellUserService.usernameInUse(userDtoToBeSaved.getUsername())) {
             result.rejectValue("username", "duplicate", "This username is not available");
         }
