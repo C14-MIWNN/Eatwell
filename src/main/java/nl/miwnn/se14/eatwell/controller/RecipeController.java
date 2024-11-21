@@ -45,13 +45,15 @@ public class RecipeController {
     private String showRecipeCreation(Model datamodel) {
         datamodel.addAttribute("newRecipe", new Recipe());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
+        datamodel.addAttribute("formIngredient", new Ingredient());
+        datamodel.addAttribute("formModalHidden", true);
         return "recipeCreation";
     }
 
     @PostMapping({"/recipe/new"})
     private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "recipe/new";
+            return "recipeCreation";
         }
 
         recipeRepository.save(recipe);
@@ -79,6 +81,24 @@ public class RecipeController {
         }
         datamodel.addAttribute("recipe", recipeOptional.get());
         return "recipeDetails";
+    }
+
+    @PostMapping("/ingredient/add")
+    private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
+                                          BindingResult result, Model datamodel) {
+        Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
+        if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
+            result.addError(new FieldError("formIngredient",
+                    "name",
+                    "this ingredient has already been added"));
+        }
+        if (result.hasErrors()){
+            datamodel.addAttribute("formIngredient", new Ingredient());
+            datamodel.addAttribute("formModalHidden", false);
+            return "recipeCreation";
+        }
+        ingredientRepository.save(ingredient);
+        return "redirect:/recipe/new";
     }
 
 }
