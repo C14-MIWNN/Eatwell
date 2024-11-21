@@ -1,0 +1,27 @@
+<!-- fragments/surpriseMe.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="user(r, fields)">
+  <div class="modal fade" id="newForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recipe Name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Never mind</button>
+          <a class="btn btn-primary" th:href="@{/surpriseMe}" >Get Another</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to cook this</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

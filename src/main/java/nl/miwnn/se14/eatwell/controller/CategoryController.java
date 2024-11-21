@@ -32,11 +32,14 @@ public class CategoryController {
         Optional<Category> categoryOptional = categoryRepository.findByCategoryName(categoryName);
 
         if (categoryOptional.isEmpty()) {
+            datamodel.addAttribute("category", new Category());
             return "categoryDetails";
         }
+
 
         datamodel.addAttribute("category", categoryOptional.get());
         return "categoryDetails";
     }
+
 
 }

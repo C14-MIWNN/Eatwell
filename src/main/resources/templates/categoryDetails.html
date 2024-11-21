@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
-    <title th:text="|${category.categoryName} details|"></title>
+<head th:replace="~{fragments/general :: baseHeader(title=${category.categoryName})}">
 </head>
+
 <body>
 
 <div th:replace="~{fragments/general :: navbar}"></div>
