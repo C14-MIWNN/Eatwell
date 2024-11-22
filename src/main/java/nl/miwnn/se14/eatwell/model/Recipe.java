@@ -31,20 +31,20 @@ public class Recipe {
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Ingredient",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+            joinColumns = @JoinColumn(name = "recipe_id",nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id",nullable = true))
     private List<Ingredient> ingredients;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(name = "Recipe_Ingredient",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "quantity_id"))
+    @JoinTable(name = "Recipe_Quantity",
+            joinColumns = @JoinColumn(name = "recipe_id",nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "quantity_id",nullable = true))
     private List<Quantity> quantities;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(name = "Recipe_Ingredient",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "unit_id"))
+    @JoinTable(name = "Recipe_Unit",
+            joinColumns = @JoinColumn(name = "recipe_id" ,nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "unit_id" ,nullable = true))
     private Set<Unit> units;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -11,12 +11,12 @@ public class Quantity {
     @GeneratedValue
     private Long quantity_id;
 
-    @Column(nullable = false, name = "quantity")
+    @Column(nullable = true, name = "quantity")
     private Integer quantity;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    @JoinTable(name = "Recipe_Ingredient",
-            joinColumns = @JoinColumn(name = "quantity_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    @JoinTable(name = "Recipe_Quantity",
+            joinColumns = @JoinColumn(name = "quantity_id", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id", nullable = true))
     private Set<Recipe> recipes;
 }

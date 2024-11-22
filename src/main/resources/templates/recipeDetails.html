@@ -7,6 +7,7 @@
 <div th:replace="~{fragments/general :: navbar}"></div>
 
 <div class="container" style="text-align: center">
+    <br>
     <h1 th:text="|${recipeName}|">Recipe Name</h1>
     <br>
     <div class="card mb-3" style="max-width: 1000px;margin:auto">
@@ -22,6 +23,28 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Ingredients</th>
+            <th>Prep Steps</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ingredients : ${recipe.ingredients}">
+            <td th:text="|${ingredients.ingredientName}|"></td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>
