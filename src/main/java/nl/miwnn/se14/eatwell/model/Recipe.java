@@ -12,6 +12,7 @@ import java.util.Set;
 
 @Entity
 public class Recipe {
+
     @Id
     @GeneratedValue
     private Long recipe_id;
