@@ -34,7 +34,7 @@
         </thead>
         <tbody>
         <tr th:each="ingredients : ${recipe.ingredients}">
-            <h5 th:text="|${ingredients.ingredientName}|" class="card-title">Ingredients Name</h5>
+            <td th:text="|${ingredients.ingredientName}|"></td>
         </tr>
         <tr>
             <td>
