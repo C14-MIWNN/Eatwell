@@ -58,7 +58,7 @@ public class RecipeController {
         }
 
         recipeRepository.save(recipe);
-        return "recipeOverview";
+        return "redirect:/recipe/new";
     }
 
     @GetMapping("/surpriseMe")
@@ -101,7 +101,7 @@ public class RecipeController {
         }
 
         ingredientRepository.save(ingredient);
-        return "redirect:/recipe/new";
+        return "recipeCreation";
     }
 
 }
