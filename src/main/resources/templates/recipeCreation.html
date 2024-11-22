@@ -52,15 +52,11 @@
                 <thead>
                     <tr >
                         <th scope="col">Ingredient</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Unit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="ingredient : ${allIngredients}">
                         <td>
-                            <a th:href="@{/ingredient/detail/{ingredientName}(ingredientName =${ingredient.ingredientName})}"
-                               th:text="${ingredient.ingredientName}"></a>
                         </td>
                     </tr>
                 </tbody>
