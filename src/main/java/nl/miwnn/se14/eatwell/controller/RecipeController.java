@@ -101,7 +101,7 @@ public class RecipeController {
         }
 
         ingredientRepository.save(ingredient);
-        return "redirect:/recipe/new";
+        return "recipeCreation";
     }
 
 }
