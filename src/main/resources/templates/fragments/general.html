@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/category/overview">Categories</a>
                 </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
+                    <a class="nav-link" th:href="@{/recipe/new}">Add recipe</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <div th:replace="~{fragments/surpriseMe :: user(${r}, ${#fields})}"></div>

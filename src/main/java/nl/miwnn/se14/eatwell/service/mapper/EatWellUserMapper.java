@@ -7,6 +7,7 @@ import nl.miwnn.se14.eatwell.model.EatWellUser;
  * @author Bart Molenaars
  * Converts between Model classes and DTOs
  */
+
 public class EatWellUserMapper {
 
     public static EatWellUser fromDTO(EatWellUserDTO dto) {

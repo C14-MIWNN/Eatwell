@@ -51,6 +51,8 @@ public class Recipe {
     @JoinColumn(name = "instruction_id" ,referencedColumnName = "instructions_id",  unique = true)
     private Instructions instructions;
 
+    @ManyToOne
+    private EatWellUser author;
 
     public Recipe() {
     }
@@ -60,6 +62,13 @@ public class Recipe {
         this.description = description;
     }
 
+    public EatWellUser getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(EatWellUser author) {
+        this.author = author;
+    }
 
     public Long getRecipe_id() {
         return recipe_id;

@@ -5,6 +5,7 @@ import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.EatWellUser;
 import nl.miwnn.se14.eatwell.repositories.EatWellUserRepository;
 import nl.miwnn.se14.eatwell.service.mapper.EatWellUserMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,6 +38,10 @@ public class EatWellUserService implements UserDetailsService {
 
     public void save(EatWellUserDTO userDTO){
         save(EatWellUserMapper.fromDTO(userDTO));
+    }
+
+    public static String getLoggedInUsername(){
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     public boolean usernameInUse(String username) {

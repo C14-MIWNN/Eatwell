@@ -1,9 +1,6 @@
 package nl.miwnn.se14.eatwell.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -27,6 +25,9 @@ public class EatWellUser implements UserDetails {
     @Column(unique = true)
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "author")
+    private Set<Recipe> myRecipes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

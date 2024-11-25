@@ -4,8 +4,11 @@ import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
+import nl.miwnn.se14.eatwell.repositories.EatWellUserRepository;
 import nl.miwnn.se14.eatwell.repositories.IngredientRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
+import nl.miwnn.se14.eatwell.service.EatWellUserService;
+import nl.miwnn.se14.eatwell.service.mapper.EatWellUserMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,21 +31,21 @@ public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
     private final IngredientRepository ingredientRepository;
+    private final EatWellUserRepository eatWellUserRepository;
 
 
     public RecipeController(RecipeRepository recipeRepository,
                             CategoryRepository categoryRepository,
-                            IngredientRepository ingredientRepository) {
+                            IngredientRepository ingredientRepository, EatWellUserRepository eatWellUserRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
         this.ingredientRepository = ingredientRepository;
+        this.eatWellUserRepository = eatWellUserRepository;
     }
 
     @GetMapping({"/","/recipe/overview"})
     private String showRecipeOverview(Model datamodel) {
         datamodel.addAttribute("allRecipes", recipeRepository.findAll());
-        datamodel.addAttribute("formUser", new EatWellUserDTO());
-        datamodel.addAttribute("formModalHidden", true);
         return "recipeOverview";
     }
 
@@ -62,6 +66,17 @@ public class RecipeController {
 
         recipeRepository.save(recipe);
         return "redirect:/recipe/new";
+    }
+
+    private List<Recipe> getMyRecipes(){
+        String userName = EatWellUserService.getLoggedInUsername();
+
+        Optional<List<Recipe>> myRecipesOptional = recipeRepository.findRecipeByUserName(userName);
+        List<Recipe> myRecipes = myRecipesOptional.orElseThrow(
+                () -> new IllegalArgumentException(String.format(
+                        "No recipes found for user %s", userName))
+        );
+        return myRecipes;
     }
 
     @GetMapping("/surpriseMe")
