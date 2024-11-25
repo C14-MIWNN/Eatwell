@@ -25,14 +25,29 @@ public class EatWellUserController {
         this.eatWellUserService = eatWellUserService;
     }
 
+    private void setupUserOverview(Model datamodel, boolean formModalHidden) {
+        datamodel.addAttribute("allUsers", eatWellUserService.getAllUsers());
+        if (!datamodel.containsAttribute("formUser")){
+            datamodel.addAttribute("formUser", new EatWellUserDTO());
+        }
+
+        datamodel.addAttribute("formModalHidden", formModalHidden);
+    }
+
     @GetMapping("/overview")
     private String showUserOverview(Model datamodel){
-        datamodel.addAttribute("allUsers", eatWellUserService.getAllUsers());
-        datamodel.addAttribute("formUser", new EatWellUserDTO());
-        datamodel.addAttribute("formModalHidden", true);
 
+        setupUserOverview(datamodel, true);
         return "userOverview";
     }
+
+    @GetMapping("/register_user")
+    private String showRegisterUserModal(Model datamodel){
+
+        setupUserOverview(datamodel, false);
+        return "userOverview";
+    }
+
 
     @PostMapping("/save")
     private String saveOrUpdateUser(@ModelAttribute("formUser") @Valid EatWellUserDTO userDtoToBeSaved,

@@ -1,5 +1,6 @@
 package nl.miwnn.se14.eatwell.controller;
 
+import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
@@ -41,6 +42,8 @@ public class RecipeController {
     private String showRecipeOverview(Model datamodel) {
         datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("allRecipes", recipeRepository.findAll());
+        datamodel.addAttribute("formUser", new EatWellUserDTO());
+        datamodel.addAttribute("formModalHidden", true);
         return "recipeOverview";
     }
 
