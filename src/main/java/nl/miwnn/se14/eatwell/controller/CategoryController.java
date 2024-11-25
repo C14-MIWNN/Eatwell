@@ -1,5 +1,6 @@
 package nl.miwnn.se14.eatwell.controller;
 
+import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.Category;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;

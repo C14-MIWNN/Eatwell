@@ -23,11 +23,16 @@ public class EatWellSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/recipe/overview",
+                        .requestMatchers("/",
+                                "/recipe/overview",
                                 "/surpriseMe",
-                                "category/overview",
-                                "/recipe/{recipeName}").permitAll()
-                        .requestMatchers("/webjars/**", "/css/**", "/images/**").permitAll()
+                                "/category/**",
+                                "/recipe/{recipeName}",
+                                "/user/save",
+                                "/user/register_user").permitAll()
+                        .requestMatchers("/webjars/**",
+                                "/css/**",
+                                "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)

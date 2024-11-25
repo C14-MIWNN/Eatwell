@@ -13,9 +13,12 @@ public class EatWellUserDTO {
     @NotBlank
     private String username;
 
-    @Size(min = 6)
+    @Size(min = 6, max = 24)
     private String password;
     private String passwordConfirm;
+
+    public EatWellUserDTO(){
+    }
 
     public String getUsername() {
         return username;
