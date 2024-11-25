@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head th:fragment="baseHeader(title)">
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
@@ -10,19 +11,24 @@
 <body>
 
 <div th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary"  >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="font-weight:bold; font-size: 18px" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/recipe/overview">
-                <img th:src="@{/images/EatWell.png}" alt="Logo" width="120" height="120">
-            </a>
-
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto"></ul>
+            <ul class="navbar-nav mx-auto" >
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/category/overview">Categories</a>
+                    </li>
                 <li class="nav-item">
-                    <h1 class="text-center text-white" style="font-size:4.5vw; font-family: 'Comic Sans MS'; font-weight: bold;">Eat Well</h1>
-
+                    <a class="nav-link" href="#">Contact</a>
                 </li>
+                </ul>
+                <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav mx-auto">
             </ul>
-
             <ul class="navbar-nav">
                 <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
                     <a class="nav-link" th:href="@{/user/overview}">Users</a>
@@ -39,47 +45,9 @@
             </ul>
         </div>
     </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:1.8em">
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mx-auto"></ul>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/recipe/overview">Home </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/category/overview">Categories</a>
-                </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
-                    <a class="nav-link" th:href="@{/recipe/new}">Add recipe</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <div th:replace="~{fragments/surpriseMe :: user(${r}, ${#fields})}"></div>
-                <li>
-
-                    <img src="/images/surpriseme.png" alt="Surprise Me"
-                         class="img-thumbnail"
-                         style="width: 180px; cursor: pointer; background-color: transparent; border: none"
-                         data-bs-toggle="modal"
-                         data-bs-target="#surpriseMeForm">
-                </li>
-            </ul>
-
-            <ul class="navbar-nav mx-auto">
-                <form class="d-flex my-2 my-lg-0">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
+    
 </div>
-
+</div>
 <div th:fragment="footer">
     <footer><p class="text-center text-muted">Copyright &copy; 2024</p></footer>
 </div>
