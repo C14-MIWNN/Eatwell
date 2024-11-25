@@ -7,30 +7,6 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.min.css}">
-    <style>
-        .form-control {
-            background-color: #ddd3ff;
-            width: 300px;
-            height: 44px;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .btn {
-                border: none;
-                color: white;
-                padding: 8px 28px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 8px 5px;
-                cursor: pointer;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -40,7 +16,7 @@
             <ul class="navbar-nav mx-auto"></ul>
             <ul class="navbar-nav mx-auto" >
                     <li class="nav-item active">
-                        <a class="nav-link" href="/recipe/overview">Home </a>
+                        <a class="nav-link" href="/">Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/category/overview">Categories</a>
@@ -53,7 +29,6 @@
                 </ul>
                 <ul class="navbar-nav mx-auto">
             </ul>
-
             <ul class="navbar-nav">
                 <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
                     <a class="nav-link" th:href="@{/user/overview}">Users</a>
@@ -67,31 +42,7 @@
             </ul>
         </div>
     </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:1.8em; background-color: white">
-        <div class="container-fluid" style="font-size:1.8em; background-color: white">
-            <a class="navbar-brand" href="/recipe/overview">
-                <img th:src="@{/images/EatWell.png}" alt="Logo" width="100" height="100">
-            </a>
-            <div class="d-flex align-items-center" style="margin-left: auto;">
-
-                <div class="d-flex align-items-center me-3">
-                    <div th:replace="~{fragments/surpriseMe :: user(${r}, ${#fields})}"></div>
-                    <img src="/images/surpriseme.png" alt="Surprise Me"
-                         class="img-thumbnail"
-                         style="width: 180px; cursor: pointer; background-color: transparent; border: none"
-                         data-bs-toggle="modal"
-                         data-bs-target="#newForm">
-                </div>
-                <form class="d-flex align-items-center">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-primary btn-sm" type="submit">Search</button>
-                </form>
-            </div>
-            <ul class="navbar-nav mx-auto"></ul>
-        </div>
-    </nav>
-
+    
 </div>
 </div>
 <div th:fragment="footer">

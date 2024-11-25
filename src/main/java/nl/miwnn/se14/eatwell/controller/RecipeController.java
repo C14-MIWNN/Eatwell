@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,14 +37,16 @@ public class RecipeController {
         this.ingredientRepository = ingredientRepository;
     }
 
-    @GetMapping({"/","/recipe/overview"})
+    @GetMapping({"/recipe/overview"})
     private String showRecipeOverview(Model datamodel) {
+        datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("allRecipes", recipeRepository.findAll());
         return "recipeOverview";
     }
 
     @GetMapping({"/recipe/new"})
     private String showRecipeCreation(Model datamodel) {
+        datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("newRecipe", new Recipe());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
         datamodel.addAttribute("formIngredient", new Ingredient());
@@ -75,8 +78,8 @@ public class RecipeController {
 
 
     @GetMapping({"/recipe/{recipeName}"})
-    private String showRecipeDetails(@PathVariable("recipeName") String recipeNaam, Model datamodel)  {
-        Optional<Recipe> recipeOptional = recipeRepository.findByName(recipeNaam);
+    private String showRecipeDetails(@PathVariable("recipeName") String recipeName, Model datamodel)  {
+        Optional<Recipe> recipeOptional = recipeRepository.findByName(recipeName);
 
         if(recipeOptional.isEmpty()) {
             return "recipeOverview";
@@ -85,23 +88,40 @@ public class RecipeController {
         return "recipeDetails";
     }
 
-    @PostMapping("/ingredient/add")
-    private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
-                                          BindingResult result, Model datamodel) {
-        Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
-        if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
-            result.addError(new FieldError("formIngredient",
-                    "name",
-                    "this ingredient has already been added"));
-        }
-        if (result.hasErrors()){
-            datamodel.addAttribute("formIngredient", new Ingredient());
-            datamodel.addAttribute("formModalHidden", false);
-            return "recipeCreation";
+    @GetMapping("/search")
+    private String showRecipeOverviewNew(Model datamodel) {
+        datamodel.addAttribute("searchForm", new Recipe());
+        return "recipeSearch";
+    }
+
+
+    @PostMapping("/search")
+    private String showRecipesBySearchTerm(
+            @ModelAttribute("searchForm") Recipe recipe,
+            BindingResult result,
+            Model datamodel) {
+
+        if (recipe.getRecipe_name() == null || recipe.getRecipe_name().isEmpty()) {
+            datamodel.addAttribute("searchForm", new Recipe());
+            datamodel.addAttribute("allRecipes", recipeRepository.findAll());
+            return "recipeSearch";
         }
 
-        ingredientRepository.save(ingredient);
-        return "recipeCreation";
+        Optional<List<Recipe>> searchResults = recipeRepository.findByNameContaining(recipe.getRecipe_name());
+
+        if (searchResults.isEmpty() || searchResults.get().isEmpty()) {
+            result.rejectValue("recipe_name", "search.results.empty",
+                    "No recipes found for your search term. Try a different one, or feel free to add your own recipe!");
+        }
+
+        if (result.hasErrors()) {
+            datamodel.addAttribute("searchForm", recipe);
+            return "recipeSearch";
+        }
+
+        datamodel.addAttribute("searchForm", recipe);
+        datamodel.addAttribute("allRecipes", searchResults.get());
+        return "recipeSearch";
     }
 
 

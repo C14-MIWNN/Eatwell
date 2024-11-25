@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
+    <title>homepage.html</title>
+    <style>
+        .form-control{
+            background-color: #ddd3ff;
+            width: 300px;
+            height: 44px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .btn {
+            border: none;
+            color: white;
+            padding: 8px 28px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 8px 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container" >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:1.8em; background-color: white">
+        <div class="container-fluid" style="font-size:1.8em; background-color: white">
+            <a class="navbar-brand" href="/recipe/overview">
+                <img th:src="@{/images/EatWell.png}" alt="Logo" width="100" height="100">
+            </a>
+            <div class="d-flex align-items-center" style="margin-left: auto;">
+
+                <div class="d-flex align-items-center me-3">
+                    <div th:replace="~{fragments/surpriseMe :: user(${r}, ${#fields})}"></div>
+                    <img src="/images/surpriseme.png" alt="Surprise Me"
+                         class="img-thumbnail"
+                         style="width: 180px; cursor: pointer; background-color: transparent; border: none"
+                         data-bs-toggle="modal"
+                         data-bs-target="#newForm">
+                </div>
+                <form class="d-flex align-items-center" th:action="@{/search}"  method="post" th:object="${searchForm}">
+                    <input class="form-control me-2" type="text" name="recipe_name" placeholder="" th:field="*{recipe_name}" aria-label="Search">
+                    <button class="btn btn-primary ms-2"type="submit">Search</button>
+                </form>
+            </div>
+            <ul class="navbar-nav mx-auto" ></ul>
+        </div>
+    </nav>
+
+</div>
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
+
+</body>
+</html>

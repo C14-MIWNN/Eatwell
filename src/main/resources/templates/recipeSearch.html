@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
+    <title>recipeSearch.html</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container" style="margin: auto">
+    <div class="row">
+        <div class="col-sm-6 col-md-3 mb-4" th:each="recepie : ${allRecipes}">
+            <br>
+            <br>
+            <br>
+            <div class="card h-100" style="width: 90%;">
+                <img th:src="${recepie.recipe_name}" class="card-img-top" alt="Recipe Image"
+                     style="height: 100px; width: 100px">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Title: <span th:text="${recepie.recipe_name}"></span>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Description: <span th:text="${recepie.description}"></span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/general :: footer}"></div>
+<div th:replace="~{fragments/general :: bottomScripts}"></div>
+
+</body>
+</html>

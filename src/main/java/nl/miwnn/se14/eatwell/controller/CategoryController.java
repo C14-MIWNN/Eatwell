@@ -1,6 +1,7 @@
 package nl.miwnn.se14.eatwell.controller;
 
 import nl.miwnn.se14.eatwell.model.Category;
+import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class CategoryController {
 
     @GetMapping({"/category/overview"})
     private String showCategoryOverview(Model datamodel) {
+        datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("allRecipes", recipeRepository.findAll());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
         return "categoryOverview";
@@ -35,7 +37,7 @@ public class CategoryController {
             datamodel.addAttribute("category", new Category());
             return "categoryDetails";
         }
-
+        datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("category", categoryOptional.get());
         return "categoryDetails";
     }
