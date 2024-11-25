@@ -73,7 +73,7 @@ public class RecipeController {
     private List<Recipe> getMyRecipes(){
         String userName = EatWellUserService.getLoggedInUsername();
 
-        Optional<List<Recipe>> myRecipesOptional = recipeRepository.findRecipeByUserName(userName);
+        Optional<List<Recipe>> myRecipesOptional = recipeRepository.findByAuthor_Username(userName);
         List<Recipe> myRecipes = myRecipesOptional.orElseThrow(
                 () -> new IllegalArgumentException(String.format(
                         "No recipes found for user %s", userName))
@@ -111,6 +111,24 @@ public class RecipeController {
         return "recipeSearch";
     }
 
+    @PostMapping("/ingredient/add")
+    private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
+                                          BindingResult result, Model datamodel) {
+        Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
+        if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
+            result.addError(new FieldError("formIngredient",
+                    "name",
+                    "this ingredient has already been added"));
+        }
+        if (result.hasErrors()){
+            datamodel.addAttribute("formIngredient", new Ingredient());
+            datamodel.addAttribute("formModalHidden", false);
+            return "recipeCreation";
+        }
+        ingredientRepository.save(ingredient);
+        return "redirect:/recipe/new";
+    }
+
 
     @PostMapping("/search")
     private String showRecipesBySearchTerm(
@@ -124,9 +142,9 @@ public class RecipeController {
             return "recipeSearch";
         }
 
-        Optional<List<Recipe>> searchResults = recipeRepository.findByNameContaining(recipe.getRecipe_name());
+        Optional<List<Recipe>> searchResults = recipeRepository.findByName(recipe.getRecipe_name());
 
-        if (searchResults.isEmpty() || searchResults.get().isEmpty()) {
+        if (searchResults.get().isEmpty()) {
             result.rejectValue("recipe_name", "search.results.empty",
                     "No recipes found for your search term. Try a different one, or feel free to add your own recipe!");
         }
