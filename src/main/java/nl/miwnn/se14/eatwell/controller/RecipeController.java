@@ -176,5 +176,5 @@ public class RecipeController {
         datamodel.addAttribute("allRecipes", searchResults.get());
         return "recipeSearch";
     }
-    
+
 }
