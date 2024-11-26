@@ -14,4 +14,9 @@ public class HomepageController {
         datamodel.addAttribute("searchForm", new Recipe());
         return "homepage";
     }
+
+    @GetMapping("/contact")
+    private String showContactPage(){
+        return "contactPage";
+    }
 }

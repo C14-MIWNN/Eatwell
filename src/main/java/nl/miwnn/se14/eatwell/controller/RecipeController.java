@@ -1,6 +1,5 @@
 package nl.miwnn.se14.eatwell.controller;
 
-import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
@@ -8,7 +7,6 @@ import nl.miwnn.se14.eatwell.repositories.EatWellUserRepository;
 import nl.miwnn.se14.eatwell.repositories.IngredientRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
-import nl.miwnn.se14.eatwell.service.mapper.EatWellUserMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -103,15 +101,19 @@ public class RecipeController {
 
     @GetMapping("/surpriseMe")
     public String showSurprise(Model datamodel) {
-        Recipe randomRecipe = recipeRepository.findAll()
-                .stream()
-                .findAny()
-                .orElse(null);
+        List<Recipe> Recipes = recipeRepository.findAll();
+        if (Recipes.isEmpty()) {
+            datamodel.addAttribute("error", "No recipes");
+            return "surpriseMe";
+        }
 
-        datamodel.addAttribute("r", randomRecipe);
-        datamodel.addAttribute("fields", randomRecipe.getIngredients());
+        Recipe randomRecipe = Recipes.get((int)(Math.random() * Recipes.size()));
+        datamodel.addAttribute("randomRecipe", randomRecipe);
+
         return "surpriseMe";
     }
+
+
 
 
     @GetMapping({"/recipe/{recipeName}"})

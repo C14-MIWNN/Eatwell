@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: baseHeader(title=${randomRecipe.getRecipe_name()})}">
+</head>
+<body>
+<div th:replace="~{fragments/general :: navbar}"></div>
+
+<div class="container" style="text-align: center">
+    <br>
+        <h1 th:text="|${randomRecipe.recipe_name}|">Recipe Name</h1> <div class="modal-footer">
+    <br>
+    <a class="btn btn-primary" href="/surpriseMe" style="margin: auto">Get Another</a>
+</div>
+    <br>
+    <div class="card mb-3" style="max-width: 1000px;margin:auto">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="/images/Meats.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 th:text="|${randomRecipe.getRecipe_name()}|" class="card-title">Recipe Name</h5>
+                    <p th:text="|${randomRecipe.description}|" class="card-title">Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Ingredients</th>
+            <th>Instructions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ingredients : ${randomRecipe.ingredients}">
+            <td th:text="|${ingredients.ingredientName}|"></td>
+        </tr>
+        <tr>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
