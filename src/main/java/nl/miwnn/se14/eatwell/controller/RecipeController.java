@@ -1,6 +1,7 @@
 package nl.miwnn.se14.eatwell.controller;
 
 import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
+import nl.miwnn.se14.eatwell.model.EatWellUser;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
@@ -9,6 +10,7 @@ import nl.miwnn.se14.eatwell.repositories.IngredientRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
 import nl.miwnn.se14.eatwell.service.mapper.EatWellUserMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -85,6 +87,8 @@ public class RecipeController {
         if (bindingResult.hasErrors()) {
             return "recipeCreation";
         }
+        EatWellUser currentUser = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        recipe.setAuthor(currentUser);
 
         recipeRepository.save(recipe);
         return "redirect:/recipe/new";
@@ -124,24 +128,7 @@ public class RecipeController {
         datamodel.addAttribute("recipe", recipeOptional.get());
         return "recipeDetails";
     }
-    @PostMapping("/ingredient/add")
-    private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
-                                          BindingResult result, Model datamodel) {
-        ArrayList<Ingredient> ingredients = new ArrayList<>();
-        Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
-        if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
-            result.addError(new FieldError("formIngredient",
-                    "name",
-                    "this ingredient has already been added"));
-        }
-        if (result.hasErrors()){
-            datamodel.addAttribute("formIngredient", new Ingredient());
-            datamodel.addAttribute("formModalHidden", false);
-            return "recipeCreation";
-        }
-        ingredients.add(ingredient);
-        return "recipeCreation";
-    }
+
 
     @GetMapping("/search")
     private String showRecipeOverviewNew(Model datamodel) {
