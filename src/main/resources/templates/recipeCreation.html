@@ -10,7 +10,7 @@
 
     <h1>Create a new recipe</h1>
 
-    <form class="row g-3" th:action="@{/recipe/new}" method="post" th:object="${newRecipe}">
+    <form class="row g-3" th:action="@{/recipe/add}" method="post" th:object="${newRecipe}">
         <input type="hidden" th:field="*{recipe_id}">
 
         <div class="row g-3 align-items-center">
@@ -42,25 +42,22 @@
     </div>
 
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#showIngredientModal">
-                Add ingredient</button>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <thead>
-                    <tr >
-                        <th scope="col">Ingredient</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row g-3 align-items-center">
+            <div class="col-1">
+                <label for="ingredients" class="col-form-label">Ingredients</label>
+            </div>
+            <div class="col-5">
+                <input type="text" id="ingredients" class="form-control"
+                       th:field="*{ingredients}" aria-describedby="ingredientsHelpInline">
+            </div>
+            <div class="col-6">
+                <span id="ingredientsHelpInline" class="form-text">
+                </span>
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-outline-primary">Save Ingredient</button>
+            </div>
         </div>
 
         <div class="row g-3 align-items-center">

@@ -1,6 +1,8 @@
 package nl.miwnn.se14.eatwell.controller;
 
 import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
+import nl.miwnn.se14.eatwell.dto.RecipeDTO;
+import nl.miwnn.se14.eatwell.model.EatWellUser;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
@@ -9,6 +11,8 @@ import nl.miwnn.se14.eatwell.repositories.IngredientRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
 import nl.miwnn.se14.eatwell.service.mapper.EatWellUserMapper;
+import nl.miwnn.se14.eatwell.service.mapper.RecipeMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,8 +65,26 @@ public class RecipeController {
         return "recipeCreation";
     }
 
-    @PostMapping({"/recipe/new"})
-    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe, BindingResult bindingResult) {
+//    @PostMapping("/recipe/new")
+//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
+//                                      BindingResult bindingResult,
+//                                      Model datamodel){
+//        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
+//
+//        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        newRecipe.setAuthor(recipeAuthor);
+//
+//        ingredientRepository.saveAll(newRecipe.getIngredients());
+//        recipeRepository.save(newRecipe);
+//
+//        return "redirect:/recipe/new";
+//    }
+
+
+    @PostMapping({"/recipe/add"})
+    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
+                                      BindingResult bindingResult,
+                                      Model datamodel) {
         if (bindingResult.hasErrors()) {
             return "recipeCreation";
         }
@@ -114,6 +137,7 @@ public class RecipeController {
     @PostMapping("/ingredient/add")
     private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
                                           BindingResult result, Model datamodel) {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
         if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
             result.addError(new FieldError("formIngredient",
@@ -125,39 +149,39 @@ public class RecipeController {
             datamodel.addAttribute("formModalHidden", false);
             return "recipeCreation";
         }
-        ingredientRepository.save(ingredient);
-        return "redirect:/recipe/new";
+        ingredients.add(ingredient);
+        return "recipeCreation";
     }
 
 
-    @PostMapping("/search")
-    private String showRecipesBySearchTerm(
-            @ModelAttribute("searchForm") Recipe recipe,
-            BindingResult result,
-            Model datamodel) {
-
-        if (recipe.getRecipe_name() == null || recipe.getRecipe_name().isEmpty()) {
-            datamodel.addAttribute("searchForm", new Recipe());
-            datamodel.addAttribute("allRecipes", recipeRepository.findAll());
-            return "recipeSearch";
-        }
-
-        Optional<List<Recipe>> searchResults = recipeRepository.findByName(recipe.getRecipe_name());
-
-        if (searchResults.get().isEmpty()) {
-            result.rejectValue("recipe_name", "search.results.empty",
-                    "No recipes found for your search term. Try a different one, or feel free to add your own recipe!");
-        }
-
-        if (result.hasErrors()) {
-            datamodel.addAttribute("searchForm", recipe);
-            return "recipeSearch";
-        }
-
-        datamodel.addAttribute("searchForm", recipe);
-        datamodel.addAttribute("allRecipes", searchResults.get());
-        return "recipeSearch";
-    }
+//    @PostMapping("/search")
+//    private String showRecipesBySearchTerm(
+//            @ModelAttribute("searchForm") Recipe recipe,
+//            BindingResult result,
+//            Model datamodel) {
+//
+//        if (recipe.getRecipe_name() == null || recipe.getRecipe_name().isEmpty()) {
+//            datamodel.addAttribute("searchForm", new Recipe());
+//            datamodel.addAttribute("allRecipes", recipeRepository.findAll());
+//            return "recipeSearch";
+//        }
+//
+//        Optional<List<Recipe>> searchResults = recipeRepository.findByName(recipe.getRecipe_name());
+//
+//        if (searchResults.get().isEmpty()) {
+//            result.rejectValue("recipe_name", "search.results.empty",
+//                    "No recipes found for your search term. Try a different one, or feel free to add your own recipe!");
+//        }
+//
+//        if (result.hasErrors()) {
+//            datamodel.addAttribute("searchForm", recipe);
+//            return "recipeSearch";
+//        }
+//
+//        datamodel.addAttribute("searchForm", recipe);
+//        datamodel.addAttribute("allRecipes", searchResults.get());
+//        return "recipeSearch";
+//    }
 
 
 }
