@@ -23,6 +23,9 @@ public class Recipe {
     @Column
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Category",
             joinColumns = @JoinColumn(name = "recipe_id"),
@@ -142,4 +145,11 @@ public class Recipe {
         this.name = name;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

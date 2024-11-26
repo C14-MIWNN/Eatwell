@@ -8,16 +8,16 @@
 
 <div class="container" style="text-align: center">
     <br>
-    <h1 th:text="|${recipeName}|">Recipe Name</h1>
+    <h1 style="text-transform: uppercase" th:text="|${recipeName}|">Recipe Name</h1>
     <br>
     <div class="card mb-3" style="max-width: 1000px;margin:auto">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="/images/Meats.png" class="img-fluid rounded-start" alt="...">
+                <img th:src="${recipe.imageUrl}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 th:text="|${recipeName}|" class="card-title">Recipe Name</h5>
+                    <h5 th:text="|${recipeName}|" class="card-title" style="text-transform: capitalize">Recipe Name</h5>
                     <p th:text="|${recipe.description}|" class="card-title">Description</p>
                 </div>
             </div>
