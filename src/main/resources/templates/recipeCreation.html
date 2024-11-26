@@ -40,23 +40,20 @@
                 </span>
         </div>
     </div>
-
-
-
         <div class="row g-3 align-items-center">
             <div class="col-1">
                 <label for="ingredients" class="col-form-label">Ingredients</label>
             </div>
-            <div class="col-5">
-                <input type="text" id="ingredients" class="form-control"
-                       th:field="*{ingredients}" aria-describedby="ingredientsHelpInline">
-            </div>
+            <select id="ingredients" class="form-select"
+                    th:field="*{ingredients}" aria-describedby="ingredientsHelpInline" multiple>
+                <option th:each="formIngredient : ${allIngredients}"
+                        th:text="${formIngredient.ingredientName}"
+                        th:value="${formIngredient.ingredient_id}">
+                </option>
+            </select>
             <div class="col-6">
                 <span id="ingredientsHelpInline" class="form-text">
                 </span>
-            </div>
-            <div class="col-4">
-                <button type="submit" class="btn btn-outline-primary">Save Ingredient</button>
             </div>
         </div>
 

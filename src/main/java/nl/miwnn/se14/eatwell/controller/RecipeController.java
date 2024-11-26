@@ -56,6 +56,7 @@ public class RecipeController {
         datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("newRecipe", new Recipe());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
+        datamodel.addAttribute("allIngredients", ingredientRepository.findAll());
         datamodel.addAttribute("formIngredient", new Ingredient());
         datamodel.addAttribute("formModalHidden", true);
         return "recipeCreation";
