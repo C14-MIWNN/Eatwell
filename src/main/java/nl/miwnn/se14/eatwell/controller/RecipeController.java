@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -122,6 +123,24 @@ public class RecipeController {
         datamodel.addAttribute("recipe", recipeOptional.get());
         return "recipeDetails";
     }
+    @PostMapping("/ingredient/add")
+    private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
+                                          BindingResult result, Model datamodel) {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        Optional<Ingredient> sameName = ingredientRepository.findByIngredientName(ingredient.getIngredientName());
+        if (sameName.isPresent() && !sameName.get().getIngredient_id().equals(ingredient.getIngredient_id())) {
+            result.addError(new FieldError("formIngredient",
+                    "name",
+                    "this ingredient has already been added"));
+        }
+        if (result.hasErrors()){
+            datamodel.addAttribute("formIngredient", new Ingredient());
+            datamodel.addAttribute("formModalHidden", false);
+            return "recipeCreation";
+        }
+        ingredients.add(ingredient);
+        return "recipeCreation";
+    }
 
     @GetMapping("/search")
     private String showRecipeOverviewNew(Model datamodel) {
@@ -157,6 +176,5 @@ public class RecipeController {
         datamodel.addAttribute("allRecipes", searchResults.get());
         return "recipeSearch";
     }
-
-
+    
 }
