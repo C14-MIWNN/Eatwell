@@ -154,34 +154,5 @@ public class RecipeController {
     }
 
 
-//    @PostMapping("/search")
-//    private String showRecipesBySearchTerm(
-//            @ModelAttribute("searchForm") Recipe recipe,
-//            BindingResult result,
-//            Model datamodel) {
-//
-//        if (recipe.getRecipe_name() == null || recipe.getRecipe_name().isEmpty()) {
-//            datamodel.addAttribute("searchForm", new Recipe());
-//            datamodel.addAttribute("allRecipes", recipeRepository.findAll());
-//            return "recipeSearch";
-//        }
-//
-//        Optional<List<Recipe>> searchResults = recipeRepository.findByName(recipe.getRecipe_name());
-//
-//        if (searchResults.get().isEmpty()) {
-//            result.rejectValue("recipe_name", "search.results.empty",
-//                    "No recipes found for your search term. Try a different one, or feel free to add your own recipe!");
-//        }
-//
-//        if (result.hasErrors()) {
-//            datamodel.addAttribute("searchForm", recipe);
-//            return "recipeSearch";
-//        }
-//
-//        datamodel.addAttribute("searchForm", recipe);
-//        datamodel.addAttribute("allRecipes", searchResults.get());
-//        return "recipeSearch";
-//    }
-
 
 }
