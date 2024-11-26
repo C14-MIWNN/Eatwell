@@ -66,8 +66,14 @@ public class RecipeController {
 
     @PostMapping({"/recipe/add"})
     private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
-                                      BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+                                      BindingResult result) {
+        Optional<Recipe> sameName = recipeRepository.findByName(recipe.getRecipe_name());
+        if (sameName.isPresent() && !sameName.get().getRecipe_id().equals(recipe.getRecipe_id())) {
+            result.addError(new FieldError("newRecipe",
+                    "recipe_name",
+                    "This recipe already exists!"));
+        }
+        if (result.hasErrors()) {
             return "recipeCreation";
         }
         EatWellUser currentUser = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

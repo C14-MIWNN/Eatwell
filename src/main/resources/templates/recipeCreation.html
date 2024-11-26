@@ -25,6 +25,10 @@
                 <span id="nameHelpInline" class="form-text">
                 </span>
             </div>
+            <div class="col-12">
+                <span id="usernameHelpInline" class="form-text" th:if="${#fields.hasErrors('recipe_name')}"
+                      th:errors="*{recipe_name}"></span>
+            </div>
         </div>
 
         <div class="row g-3 align-items-center">
@@ -32,8 +36,8 @@
             <label for="description" class="col-form-label">Description</label>
         </div>
         <div class="col-5">
-            <input type="text" id="description" class="form-control"
-                   th:field="*{description}" aria-describedby="descriptionHelpInline">
+            <textarea id="description" class="form-control"
+                      th:field="*{description}" aria-describedby="descriptionHelpInline"></textarea>
         </div>
         <div class="col-6">
                 <span id="decriptionHelpInline" class="form-text" >
@@ -55,7 +59,6 @@
                 <span id="ingredientsHelpInline" class="form-text">
                 </span>
             </div>
-            <input class="btn btn-primary" type="button" value="Add Ingredient">
         </div>
         <div>
             <ul class="navbar-nav mx-auto">
@@ -64,8 +67,21 @@
                     <a th:href="@{/ingredient/overview}">Add it to the list!</a>
                 </li>
             </ul>
-
         </div>
+        <div class="row g-3 align-items-center">
+            <div class="col-1">
+                <label for="preparation" class="col-form-label">Preparation</label>
+            </div>
+            <div class="col-5">
+            <textarea id="preparation" class="form-control"
+                      th:field="*{instructions}" aria-describedby="preparationHelpInline"></textarea>
+            </div>
+            <div class="col-6">
+                <span id="preparationHelpInline" class="form-text" >
+                </span>
+            </div>
+        </div>
+
 
         <div class="row g-3 align-items-center">
             <div class="col-1">
