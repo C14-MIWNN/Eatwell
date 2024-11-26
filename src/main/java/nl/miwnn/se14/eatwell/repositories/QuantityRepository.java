@@ -9,6 +9,7 @@ import java.util.Optional;
  * @author Furkan Altay
  * Purpose for the class
  */
+
 public interface QuantityRepository extends JpaRepository<Quantity, Long> {
     Optional<Quantity> findByQuantity (Integer quantity);
 }

@@ -1,6 +1,5 @@
 package nl.miwnn.se14.eatwell.controller;
 
-import jakarta.validation.Valid;
 import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
@@ -61,8 +60,26 @@ public class RecipeController {
         return "recipeCreation";
     }
 
-    @PostMapping({"/recipe/new"})
-    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe, BindingResult bindingResult) {
+//    @PostMapping("/recipe/new")
+//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
+//                                      BindingResult bindingResult,
+//                                      Model datamodel){
+//        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
+//
+//        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        newRecipe.setAuthor(recipeAuthor);
+//
+//        ingredientRepository.saveAll(newRecipe.getIngredients());
+//        recipeRepository.save(newRecipe);
+//
+//        return "redirect:/recipe/new";
+//    }
+
+
+    @PostMapping({"/recipe/add"})
+    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
+                                      BindingResult bindingResult,
+                                      Model datamodel) {
         if (bindingResult.hasErrors()) {
             return "recipeCreation";
         }

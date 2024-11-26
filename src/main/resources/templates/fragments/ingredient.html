@@ -6,18 +6,14 @@
 <body>
 
 <div th:fragment="newIngredientForm(formIngredient, #fields)">
-    <form class="row g-3" th:action="@{/ingredient/add}" method="post" th:object="${formIngredient}">
+    <form class="row g-3" th:action="@{/recipe/new}" method="post" th:object="${newRecipe}">
         <div class="row g-3 align-items-center">
             <div class="col-5">
                 <label for="ingredientName" class="col-form-label">Ingredient name</label>
             </div>
             <div class="col-7">
                 <input type="text" id="ingredientName" class="form-control" aria-describedby="ingredientNameHelpInline"
-                       th:field="*{ingredientName}">
-            </div>
-            <div class="col-12">
-                <span id="ingredientNameHelpInline" class="form-text" th:if="${#fields.hasErrors('ingredientName')}"
-                      th:errors="*{ingredientName}"></span>
+                       th:field="*{ingredients}">
             </div>
         </div>
         <button type="submit" class="btn btn-primary mb-3">Save ingredient</button>
