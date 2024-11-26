@@ -1,5 +1,6 @@
 package nl.miwnn.se14.eatwell.controller;
 
+import jakarta.validation.Valid;
 import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
@@ -73,7 +74,7 @@ public class RecipeController {
     private List<Recipe> getMyRecipes(){
         String userName = EatWellUserService.getLoggedInUsername();
 
-        Optional<List<Recipe>> myRecipesOptional = recipeRepository.findRecipeByUserName(userName);
+        Optional<List<Recipe>> myRecipesOptional = recipeRepository.findByAuthor_Username(userName);
         List<Recipe> myRecipes = myRecipesOptional.orElseThrow(
                 () -> new IllegalArgumentException(String.format(
                         "No recipes found for user %s", userName))
@@ -118,7 +119,7 @@ public class RecipeController {
             BindingResult result,
             Model datamodel) {
 
-        if (recipe.getRecipe_name() == null || recipe.getRecipe_name().isEmpty()) {
+        if (recipe.getRecipe_name().isEmpty()) {
             datamodel.addAttribute("searchForm", new Recipe());
             datamodel.addAttribute("allRecipes", recipeRepository.findAll());
             return "recipeSearch";
@@ -127,13 +128,12 @@ public class RecipeController {
         Optional<List<Recipe>> searchResults = recipeRepository.findByNameContaining(recipe.getRecipe_name());
 
         if (searchResults.isEmpty() || searchResults.get().isEmpty()) {
-            result.rejectValue("recipe_name", "search.results.empty",
-                    "No recipes found for your search term. Try a different one, or feel free to add your own recipe!");
+            datamodel.addAttribute("errorMessage",
+                    "No recipes found. Try searching with a different term!");
         }
 
         if (result.hasErrors()) {
-            datamodel.addAttribute("searchForm", recipe);
-            return "recipeSearch";
+            return "homepage";
         }
 
         datamodel.addAttribute("searchForm", recipe);

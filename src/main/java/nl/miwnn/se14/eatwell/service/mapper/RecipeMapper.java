@@ -13,6 +13,6 @@ public class RecipeMapper {
     public static Recipe fromDTO(RecipeDTO dto){
         Recipe recipe = new Recipe();
 
-
+        return recipe;
     }
 }
