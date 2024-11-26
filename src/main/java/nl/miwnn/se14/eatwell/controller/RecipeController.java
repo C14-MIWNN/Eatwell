@@ -1,8 +1,6 @@
 package nl.miwnn.se14.eatwell.controller;
 
 import nl.miwnn.se14.eatwell.dto.EatWellUserDTO;
-import nl.miwnn.se14.eatwell.dto.RecipeDTO;
-import nl.miwnn.se14.eatwell.model.EatWellUser;
 import nl.miwnn.se14.eatwell.model.Ingredient;
 import nl.miwnn.se14.eatwell.model.Recipe;
 import nl.miwnn.se14.eatwell.repositories.CategoryRepository;
@@ -11,8 +9,6 @@ import nl.miwnn.se14.eatwell.repositories.IngredientRepository;
 import nl.miwnn.se14.eatwell.repositories.RecipeRepository;
 import nl.miwnn.se14.eatwell.service.EatWellUserService;
 import nl.miwnn.se14.eatwell.service.mapper.EatWellUserMapper;
-import nl.miwnn.se14.eatwell.service.mapper.RecipeMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,38 +56,39 @@ public class RecipeController {
         datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("newRecipe", new Recipe());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
-//        datamodel.addAttribute("formIngredient", new Ingredient());
-//        datamodel.addAttribute("formModalHidden", true);
+        datamodel.addAttribute("allIngredients", ingredientRepository.findAll());
+        datamodel.addAttribute("formIngredient", new Ingredient());
+        datamodel.addAttribute("formModalHidden", true);
         return "recipeCreation";
     }
 
-    @PostMapping("/recipe/add")
-    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
-                                      BindingResult bindingResult,
-                                      Model datamodel){
-        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
-
-        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        newRecipe.setAuthor(recipeAuthor);
-
-        ingredientRepository.saveAll(newRecipe.getIngredients());
-        recipeRepository.save(newRecipe);
-
-        return "redirect:/recipe/new";
-    }
-
-
-//    @PostMapping({"/recipe/add"})
-//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
+//    @PostMapping("/recipe/new")
+//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
 //                                      BindingResult bindingResult,
-//                                      Model datamodel) {
-//        if (bindingResult.hasErrors()) {
-//            return "recipeCreation";
-//        }
+//                                      Model datamodel){
+//        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
 //
-//        recipeRepository.save(recipe);
+//        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        newRecipe.setAuthor(recipeAuthor);
+//
+//        ingredientRepository.saveAll(newRecipe.getIngredients());
+//        recipeRepository.save(newRecipe);
+//
 //        return "redirect:/recipe/new";
 //    }
+
+
+    @PostMapping({"/recipe/add"})
+    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
+                                      BindingResult bindingResult,
+                                      Model datamodel) {
+        if (bindingResult.hasErrors()) {
+            return "recipeCreation";
+        }
+
+        recipeRepository.save(recipe);
+        return "redirect:/recipe/new";
+    }
 
     private List<Recipe> getMyRecipes(){
         String userName = EatWellUserService.getLoggedInUsername();
