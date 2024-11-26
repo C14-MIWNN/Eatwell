@@ -13,7 +13,7 @@
             <br>
             <br>
             <br>
-            <div class="card h-100" style="width: 90%;">
+            <div class="card h-100" style="width: 90%;" aria-describedby="error">
                 <img th:src="${recepie.recipe_name}" class="card-img-top" alt="Recipe Image"
                      style="height: 100px; width: 100px">
                 <div class="card-body">
@@ -27,6 +27,8 @@
             </div>
         </div>
     </div>
+    <br>
+    <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>

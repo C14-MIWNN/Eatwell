@@ -45,7 +45,7 @@
                          class="img-thumbnail"
                          style="width: 180px; cursor: pointer; background-color: transparent; border: none"
                          data-bs-toggle="modal"
-                         data-bs-target="#newForm">
+                         data-bs-target="#surpriseMeForm">
                 </div>
                 <form class="d-flex align-items-center" th:action="@{/search}"  method="post" th:object="${searchForm}">
                     <input class="form-control me-2" type="text" name="recipe_name" placeholder="" th:field="*{recipe_name}" aria-label="Search">

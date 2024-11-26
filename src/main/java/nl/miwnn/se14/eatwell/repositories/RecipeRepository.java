@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface RecipeRepository extends JpaRepository <Recipe, Long> {
+public interface RecipeRepository extends JpaRepository <Recipe,Long> {
     Optional<Recipe> findByName(String name);
 
+    Optional<List<Recipe>> findByNameContaining(String name);
     Optional<List<Recipe>> findByAuthor_Username(String username);
 }

@@ -60,38 +60,38 @@ public class RecipeController {
         datamodel.addAttribute("searchForm", new Recipe());
         datamodel.addAttribute("newRecipe", new Recipe());
         datamodel.addAttribute("allCategories", categoryRepository.findAll());
-        datamodel.addAttribute("formIngredient", new Ingredient());
-        datamodel.addAttribute("formModalHidden", true);
+//        datamodel.addAttribute("formIngredient", new Ingredient());
+//        datamodel.addAttribute("formModalHidden", true);
         return "recipeCreation";
     }
 
-//    @PostMapping("/recipe/new")
-//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
-//                                      BindingResult bindingResult,
-//                                      Model datamodel){
-//        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
-//
-//        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        newRecipe.setAuthor(recipeAuthor);
-//
-//        ingredientRepository.saveAll(newRecipe.getIngredients());
-//        recipeRepository.save(newRecipe);
-//
-//        return "redirect:/recipe/new";
-//    }
-
-
-    @PostMapping({"/recipe/add"})
-    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
+    @PostMapping("/recipe/add")
+    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
                                       BindingResult bindingResult,
-                                      Model datamodel) {
-        if (bindingResult.hasErrors()) {
-            return "recipeCreation";
-        }
+                                      Model datamodel){
+        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
 
-        recipeRepository.save(recipe);
+        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        newRecipe.setAuthor(recipeAuthor);
+
+        ingredientRepository.saveAll(newRecipe.getIngredients());
+        recipeRepository.save(newRecipe);
+
         return "redirect:/recipe/new";
     }
+
+
+//    @PostMapping({"/recipe/add"})
+//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
+//                                      BindingResult bindingResult,
+//                                      Model datamodel) {
+//        if (bindingResult.hasErrors()) {
+//            return "recipeCreation";
+//        }
+//
+//        recipeRepository.save(recipe);
+//        return "redirect:/recipe/new";
+//    }
 
     private List<Recipe> getMyRecipes(){
         String userName = EatWellUserService.getLoggedInUsername();
@@ -127,13 +127,6 @@ public class RecipeController {
         datamodel.addAttribute("recipe", recipeOptional.get());
         return "recipeDetails";
     }
-
-    @GetMapping("/search")
-    private String showRecipeOverviewNew(Model datamodel) {
-        datamodel.addAttribute("searchForm", new Recipe());
-        return "recipeSearch";
-    }
-
     @PostMapping("/ingredient/add")
     private String saveOrUpdateIngredient(@ModelAttribute("formIngredient") Ingredient ingredient,
                                           BindingResult result, Model datamodel) {
@@ -153,6 +146,39 @@ public class RecipeController {
         return "recipeCreation";
     }
 
+    @GetMapping("/search")
+    private String showRecipeOverviewNew(Model datamodel) {
+        datamodel.addAttribute("searchForm", new Recipe());
+        return "recipeSearch";
+    }
 
+
+    @PostMapping("/search")
+    private String showRecipesBySearchTerm(
+            @ModelAttribute("searchForm") Recipe recipe,
+            BindingResult result,
+            Model datamodel) {
+
+        if (recipe.getRecipe_name().isEmpty()) {
+            datamodel.addAttribute("searchForm", new Recipe());
+            datamodel.addAttribute("allRecipes", recipeRepository.findAll());
+            return "recipeSearch";
+        }
+
+        Optional<List<Recipe>> searchResults = recipeRepository.findByNameContaining(recipe.getRecipe_name());
+
+        if (searchResults.isEmpty() || searchResults.get().isEmpty()) {
+            datamodel.addAttribute("errorMessage",
+                    "No recipes found. Try searching with a different term!");
+        }
+
+        if (result.hasErrors()) {
+            return "homepage";
+        }
+
+        datamodel.addAttribute("searchForm", recipe);
+        datamodel.addAttribute("allRecipes", searchResults.get());
+        return "recipeSearch";
+    }
 
 }
