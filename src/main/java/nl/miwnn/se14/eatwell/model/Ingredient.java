@@ -2,6 +2,7 @@ package nl.miwnn.se14.eatwell.model;
 
 import jakarta.persistence.*;
 
+import java.awt.desktop.PrintFilesEvent;
 import java.util.Set;
 
 @Entity
@@ -33,5 +34,16 @@ public class Ingredient {
 
     public void setIngredient_id(Long ingredient_id) {
         this.ingredient_id = ingredient_id;
+    }
+
+    public int countNumberOfCapitalLetters (String ingredientName){
+       int capitalLetters = 0;
+
+        for (int i = 0; i < ingredientName.length(); i++) {
+            char ch = ingredientName.charAt(i);
+            if (ch >= 'A' && ch <= 'Z')
+                capitalLetters++;
+        }
+        return capitalLetters;
     }
 }

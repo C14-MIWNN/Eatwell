@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -69,4 +70,5 @@ public class IngredientController {
         ingredientRepository.save(ingredient);
         return "redirect:/ingredient/overview";
     }
+
 }

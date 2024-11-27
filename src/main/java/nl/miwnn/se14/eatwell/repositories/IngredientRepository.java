@@ -10,6 +10,7 @@ import java.util.Optional;
  * @author Furkan Altay
  * Purpose for the class
  */
+
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     Optional<Ingredient> findByIngredientName (String ingredientName);
 }

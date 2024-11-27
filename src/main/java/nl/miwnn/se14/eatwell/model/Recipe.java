@@ -20,13 +20,14 @@ public class Recipe {
     @Column(name = "recipe_name")
     private String name;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "instructions")
+    @Column(name = "instructions",
+    columnDefinition = "LONGTEXT")
     private String instructions;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
