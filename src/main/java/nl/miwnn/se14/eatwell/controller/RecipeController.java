@@ -76,16 +76,6 @@ public class RecipeController {
         return "redirect:/recipe/new";
     }
 
-    private List<Recipe> getMyRecipes(){
-        String userName = EatWellUserService.getLoggedInUsername();
-
-        Optional<List<Recipe>> myRecipesOptional = recipeRepository.findByAuthor_Username(userName);
-        List<Recipe> myRecipes = myRecipesOptional.orElseThrow(
-                () -> new IllegalArgumentException(String.format(
-                        "No recipes found for user %s", userName))
-        );
-        return myRecipes;
-    }
 
     @GetMapping("/surpriseMe")
     public String showSurprise(Model datamodel) {
