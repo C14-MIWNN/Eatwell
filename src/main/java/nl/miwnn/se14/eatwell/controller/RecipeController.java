@@ -64,27 +64,16 @@ public class RecipeController {
         return "recipeCreation";
     }
 
-//    @PostMapping("/recipe/new")
-//    private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") RecipeDTO recipeDTO,
-//                                      BindingResult bindingResult,
-//                                      Model datamodel){
-//        Recipe newRecipe = RecipeMapper.fromDTO(recipeDTO);
-//
-//        EatWellUser recipeAuthor = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        newRecipe.setAuthor(recipeAuthor);
-//
-//        ingredientRepository.saveAll(newRecipe.getIngredients());
-//        recipeRepository.save(newRecipe);
-//
-//        return "redirect:/recipe/new";
-//    }
-
-
     @PostMapping({"/recipe/add"})
     private String saveOrUpdateRecipe(@ModelAttribute("newRecipe") Recipe recipe,
-                                      BindingResult bindingResult,
-                                      Model datamodel) {
-        if (bindingResult.hasErrors()) {
+                                      BindingResult result) {
+        Optional<Recipe> sameName = recipeRepository.findByName(recipe.getRecipe_name());
+        if (sameName.isPresent() && !sameName.get().getRecipe_id().equals(recipe.getRecipe_id())) {
+            result.addError(new FieldError("newRecipe",
+                    "recipe_name",
+                    "This recipe already exists!"));
+        }
+        if (result.hasErrors()) {
             return "recipeCreation";
         }
         EatWellUser currentUser = (EatWellUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
