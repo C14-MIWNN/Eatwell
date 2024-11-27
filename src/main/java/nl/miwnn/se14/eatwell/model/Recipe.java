@@ -101,13 +101,16 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getInstructions() {
+        return instructions;
     }
 
     public void setInstructions(String instructions) {
