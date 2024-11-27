@@ -18,7 +18,6 @@ private String description;
 private Set<Category> category;
 private ArrayList<Ingredient> ingredients;
 private List<Quantity> quantities;
-private Instructions instructions;
 private EatWellUser author;
 
 public RecipeDTO(){
@@ -71,14 +70,6 @@ public RecipeDTO(){
 
     public void setQuantities(List<Quantity> quantities) {
         this.quantities = quantities;
-    }
-
-    public Instructions getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(Instructions instructions) {
-        this.instructions = instructions;
     }
 
     public EatWellUser getAuthor() {

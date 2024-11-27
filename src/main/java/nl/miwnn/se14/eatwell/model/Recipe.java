@@ -26,6 +26,9 @@ public class Recipe {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "instructions")
+    private String instructions;
+
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Category",
             joinColumns = @JoinColumn(name = "recipe_id"),
@@ -49,10 +52,6 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id" ,nullable = true),
             inverseJoinColumns = @JoinColumn(name = "unit_id" ,nullable = true))
     private Set<Unit> units;
-
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "instruction_id" ,referencedColumnName = "instructions_id",  unique = true)
-    private Instructions instructions;
 
     @ManyToOne
     private EatWellUser author;
@@ -113,37 +112,6 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public List<Quantity> getQuantities() {
-        return quantities;
-    }
-
-    public void setQuantities(List<Quantity> quantities) {
-        this.quantities = quantities;
-    }
-
-    public Set<Unit> getUnits() {
-        return units;
-    }
-
-    public void setUnits(Set<Unit> units) {
-        this.units = units;
-    }
-
-    public Instructions getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(Instructions instructions) {
-        this.instructions = instructions;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -151,5 +119,9 @@ public class Recipe {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 }
