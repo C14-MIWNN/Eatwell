@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:replace="~{fragments/general :: baseHeader(~{:: title})}">
+<head th:replace="~{fragments/general :: baseHeader(title='Homepage')}">
     <title>homepage.html</title>
     <style>
         .form-control{
@@ -35,18 +35,20 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:1.8em; background-color: white">
         <div class="container-fluid" style="font-size:1.8em; background-color: white">
             <a class="navbar-brand" href="/">
-                <img th:src="@{/images/EatWell.png}" alt="Logo" width="120" height="130">
+                <img th:src="@{/images/EatWell.png}" alt="Logo" width="120" height="140">
             </a>
             <div class="d-flex align-items-center" style="margin-left: auto;">
 
                 <div class="d-flex align-items-center me-3">
-                    <div th:replace="~{fragments/surpriseMe :: user(${r}, ${#fields})}"></div>
-                    <img src="/images/surpriseme.png" alt="Surprise Me"
-                         class="img-thumbnail"
-                         style="width: 180px; cursor: pointer; background-color: transparent; border: none"
-                         data-bs-toggle="modal"
-                         data-bs-target="#surpriseMeForm">
+                    <a href="/surpriseMe">
+                        <img src="/images/surpriseme.png" alt="Surprise Me"
+                             class="img-thumbnail"
+                             style="width: 180px; cursor: pointer; background-color: transparent; border: none"
+                             data-bs-toggle="modal"
+                             data-bs-target="#surpriseMeForm">
+                    </a>
                 </div>
+
                 <form class="d-flex align-items-center" th:action="@{/search}"  method="post" th:object="${searchForm}">
                     <input class="form-control me-2" type="text" name="recipe_name" placeholder="" th:field="*{recipe_name}" aria-label="Search">
                     <button class="btn btn-primary ms-2"type="submit">Search</button>
@@ -55,7 +57,14 @@
             <ul class="navbar-nav mx-auto" ></ul>
         </div>
     </nav>
-
+    <div class="card mb-3">
+        <img src="/images/soup.png" style="width: 23rem; margin: auto; border: none" >
+        <div class="card-body">
+            <h5 class="card-title">Linzensoep</h5>
+            Healthy and nutritious! An easy basic recipe for a filling spicy lentil soup based on carrot, lentils and celery..
+            <a th:href="@{/recipe/linzensoep}">Read more</a>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>

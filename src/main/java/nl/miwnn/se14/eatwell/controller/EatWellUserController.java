@@ -71,4 +71,5 @@ public class EatWellUserController {
         eatWellUserService.save(userDtoToBeSaved);
         return "redirect:/user/overview";
     }
+
 }

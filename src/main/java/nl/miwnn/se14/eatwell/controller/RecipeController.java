@@ -96,15 +96,19 @@ public class RecipeController {
 
     @GetMapping("/surpriseMe")
     public String showSurprise(Model datamodel) {
-        Recipe randomRecipe = recipeRepository.findAll()
-                .stream()
-                .findAny()
-                .orElse(null);
+        List<Recipe> Recipes = recipeRepository.findAll();
+        if (Recipes.isEmpty()) {
+            datamodel.addAttribute("error", "No recipes");
+            return "surpriseMe";
+        }
 
-        datamodel.addAttribute("r", randomRecipe);
-        datamodel.addAttribute("fields", randomRecipe.getIngredients());
+        Recipe randomRecipe = Recipes.get((int)(Math.random() * Recipes.size()));
+        datamodel.addAttribute("randomRecipe", randomRecipe);
+
         return "surpriseMe";
     }
+
+
 
 
     @GetMapping({"/recipe/{recipeName}"})
