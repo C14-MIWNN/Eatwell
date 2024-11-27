@@ -12,37 +12,57 @@
     <a class="btn btn-primary" href="/surpriseMe" style="margin: auto">Get Another</a>
 </div>
     <br>
-    <div class="card mb-3" style="max-width: 1000px;margin:auto">
-        <div class="row g-0">
+    <br>
+    <div class="card" style="text-align: center">
+        <div class="row">
             <div class="col-md-4">
-                <img src="/images/Meats.png" class="img-fluid rounded-start" alt="...">
+                <img th:src="${randomRecipe.imageUrl}" class="img-fluid rounded-start" alt="Recipe Image">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 th:text="|${randomRecipe.getRecipe_name()}|" class="card-title">Recipe Name</h5>
-                    <p th:text="|${randomRecipe.description}|" class="card-title">Description</p>
+                    <h5 th:text="|${randomRecipe.recipe_name}|" class="card-title">Recipe Name</h5>
+                    <p th:text="|${randomRecipe.description}|" class="card-text">Description</p>
                 </div>
             </div>
         </div>
     </div>
     <br>
     <br>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Ingredients</th>
-            <th>Instructions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="ingredients : ${randomRecipe.ingredients}">
-            <td th:text="|${ingredients.ingredientName}|"></td>
-        </tr>
-        <tr>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row" style="text-align: center;">
+        <div class="column" style="float: left;
+            width: 50%;
+            padding: 5px;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ingredients</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ingredient : ${randomRecipe.ingredients}">
+                    <td th:text="${ingredient.ingredientName}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <div class="column" style="float: right;
+            width: 50%;
+            padding: 5px;">
+            <table class="table-striped">
+                <thead>
+                <tr>
+                    <th>Instructions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${randomRecipe.instructions}">Instructions</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>

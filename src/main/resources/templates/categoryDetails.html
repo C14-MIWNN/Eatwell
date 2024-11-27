@@ -15,7 +15,7 @@
 
             <div class="col-sm-6 col-md-3 mb-4" th:each="recipe : ${category.recipes}">
                 <div class="card h-100" style="width: 100%; margin-left: auto; margin-right: auto;">
-                    <img th:src="${recipe.recipe_name}" class="card-img-top" alt="Recipe Image"
+                    <img th:src="${recipe.getImageUrl()}" class="card-img-top" alt="Recipe Image"
                          style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">

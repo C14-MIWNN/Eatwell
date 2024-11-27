@@ -97,9 +97,10 @@ public class InitializeController {
         recipeRepository.save(recipe);
     }
 
-    private void  makeIngredient(String name){
+    public void makeIngredient(String name){
         Ingredient ingredient = new Ingredient();
         ingredient.setIngredientName(name);
         ingredientRepository.save(ingredient);
     }
+
 }

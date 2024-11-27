@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="~{fragments/general :: baseHeader(title=${recipeName})}">
+
 </head>
 <body>
 
+
 <div th:replace="~{fragments/general :: navbar}"></div>
 
-<div class="container" style="text-align: center">
+<div class="container" >
+
     <br>
-    <h1 style="text-transform: uppercase" th:text="|${recipeName}|">Recipe Name</h1>
+    <h1 th:text="|${recipeName}|" style="text-align: center">Recipe Name</h1>
     <br>
-    <div class="card mb-3" style="max-width: 1000px;margin:auto">
-        <div class="row g-0">
+    <div class="card" style="text-align: center">
+        <div class="row">
             <div class="col-md-4">
-                <img th:src="${recipe.imageUrl}" class="img-fluid rounded-start" alt="...">
+                <img th:src="${recipe.imageUrl}" class="img-fluid rounded-start" alt="Recipe Image">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 th:text="|${recipeName}|" class="card-title" style="text-transform: capitalize">Recipe Name</h5>
-                    <p th:text="|${recipe.description}|" class="card-title">Description</p>
+                    <h5 th:text="|${recipeName}|" class="card-title">Recipe Name</h5>
+                    <p th:text="|${recipe.description}|" class="card-text">Description</p>
                 </div>
             </div>
         </div>
     </div>
     <br>
     <br>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Ingredients</th>
-            <th>Instructions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="ingredients : ${recipe.ingredients}">
-            <td th:text="|${ingredients.ingredientName}|"></td>
-        </tr>
-        <tr>
-            <td>
+    <div class="row" style="text-align: center;">
+        <div class="column" style="float: left;
+            width: 50%;
+            padding: 5px;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ingredients</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ingredient : ${recipe.ingredients}">
+                    <td th:text="${ingredient.ingredientName}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-            </td>
-            <td>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="column" style="float: right;
+            width: 50%;
+            padding: 5px;">
+            <table class="table-striped">
+                <thead>
+                <tr>
+                    <th>Instructions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${recipe.instructions}">Instructions</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <div th:replace="~{fragments/general :: footer}"></div>

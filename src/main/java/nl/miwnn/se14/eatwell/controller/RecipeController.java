@@ -46,13 +46,6 @@ public class RecipeController {
         this.eatWellUserRepository = eatWellUserRepository;
     }
 
-    @GetMapping({"/recipe/overview"})
-    private String showRecipeOverview(Model datamodel) {
-        datamodel.addAttribute("searchForm", new Recipe());
-        datamodel.addAttribute("allRecipes", recipeRepository.findAll());
-        return "recipeOverview";
-    }
-
     @GetMapping({"/recipe/new"})
     private String showRecipeCreation(Model datamodel) {
         datamodel.addAttribute("searchForm", new Recipe());
@@ -109,14 +102,12 @@ public class RecipeController {
     }
 
 
-
-
     @GetMapping({"/recipe/{recipeName}"})
     private String showRecipeDetails(@PathVariable("recipeName") String recipeName, Model datamodel)  {
         Optional<Recipe> recipeOptional = recipeRepository.findByName(recipeName);
 
         if(recipeOptional.isEmpty()) {
-            return "recipeOverview";
+            return "homepage";
         }
         datamodel.addAttribute("recipe", recipeOptional.get());
         return "recipeDetails";
