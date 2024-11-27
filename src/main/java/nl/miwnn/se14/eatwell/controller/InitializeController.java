@@ -59,6 +59,20 @@ public class InitializeController {
     makeIngredient("Ginger");
     makeIngredient("Chili Pepper");
     makeIngredient("Mustard");
+    makeIngredient("Lentil");
+    makeIngredient("Parsley");
+    makeIngredient("Onion");
+    makeIngredient("Garlic");
+    makeIngredient("Basil");
+    makeIngredient("Spinach");
+    makeIngredient("Vinegar");
+    makeIngredient("Basil");
+    makeIngredient("Black pepper");
+
+
+
+
+
 
     }
 
