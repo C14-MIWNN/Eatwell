@@ -13,7 +13,7 @@ import java.util.Optional;
 
 /**
   * @author Bart Molenaars
-  * Purpose for the class
+  * Handles requests pertaining to all ingredients
   */
 
 @Controller
