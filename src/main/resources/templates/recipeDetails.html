@@ -5,7 +5,7 @@
 
 <div th:replace="~{fragments/general :: navbar}"></div>
 
-<div class="container" >
+<div class="container"  style="background-color: #fff5ee">
 
     <br>
     <h1 th:text="|${recipeName}|" style="text-align: center">Recipe Name</h1>
@@ -13,7 +13,7 @@
     <div class="card" style="text-align: center">
         <div class="row">
             <div class="col-md-4">
-                <img th:src="${recipe.imageUrl}" class="img-fluid rounded-start" alt="Recipe Image">
+                <img th:src="${recipe.imageUrl}" class="img-fluid rounded-start" alt="Recipe Image" >
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -28,8 +28,14 @@
     <div class="row" style="text-align: center;">
         <div class="column" style="float: left;
             width: 50%;
-            padding: 1em;">
-            <table class="table">
+            padding: 5px;">
+            <table class="table" style="
+                border-style: groove;
+                border-color: #83afff;
+                border-width: 7px;
+                background-color: red"
+
+                >
                 <thead>
                 <tr>
                     <th>Ingredients</th>
@@ -45,8 +51,13 @@
 
         <div class="column" style="float: right;
             width: 50%;
-            padding: 1em;">
-            <table class="table-striped">
+            padding: 5px;">
+            <table class="table" style="
+                border-style: groove;
+                border-color:  #83afff;
+                border-width: 7px;
+                background-color: red"
+                >
                 <thead>
                 <tr>
                     <th>Instructions</th>
