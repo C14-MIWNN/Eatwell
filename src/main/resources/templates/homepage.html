@@ -3,27 +3,6 @@
 <head th:replace="~{fragments/general :: baseHeader(title='Homepage')}">
     <title>homepage.html</title>
     <style>
-        .form-control{
-            background-color: #ddd3ff;
-            width: 300px;
-            height: 44px;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .btn {
-            border: none;
-            color: white;
-            padding: 8px 28px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 8px 5px;
-            cursor: pointer;
-        }
 
     </style>
 </head>
@@ -31,9 +10,9 @@
 
 <div th:replace="~{fragments/general :: navbar}"></div>
 
-<div class="container" >
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:1.8em; background-color: white">
-        <div class="container-fluid" style="font-size:1.8em; background-color: white">
+<div class="container"  style="background-color: seashell">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:1.8em;" >
+        <div class="container-fluid" style="font-size:1.8em;background-color: seashell">
             <a class="navbar-brand" href="/">
                 <img th:src="@{/images/EatWell.png}" alt="Logo" width="120" height="140">
             </a>
@@ -43,7 +22,7 @@
                     <a href="/surpriseMe">
                         <img src="/images/surpriseme.png" alt="Surprise Me"
                              class="img-thumbnail"
-                             style="width: 180px; cursor: pointer; background-color: transparent; border: none"
+                             style="width: 180px; cursor: pointer; background-color: seashell; border: none"
                              data-bs-toggle="modal"
                              data-bs-target="#surpriseMeForm">
                     </a>
@@ -51,18 +30,31 @@
 
                 <form class="d-flex align-items-center" th:action="@{/search}"  method="post" th:object="${searchForm}">
                     <input class="form-control me-2" type="text" name="recipe_name" placeholder="" th:field="*{recipe_name}" aria-label="Search">
-                    <button class="btn btn-primary ms-2"type="submit">Search</button>
+                    <button class="btn btn-primary ms-2" type="submit">Search</button>
                 </form>
             </div>
             <ul class="navbar-nav mx-auto" ></ul>
         </div>
     </nav>
-    <div class="card mb-3">
-        <img src="/images/soup.png" style="width: 23rem; margin: auto; border: none" >
-        <div class="card-body">
-            <h5 class="card-title">Lentil Soup</h5>
-            Healthy and nutritious! An easy basic recipe for a filling spicy lentil soup based on carrot, lentils and celery..
-            <a th:href="@{/recipe/Lentil Soup}">Read more</a>
+    <br>
+    <br>
+    <div class="card" style="text-align: center">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="/images/soup.png" class="img-fluid rounded-start" alt="Recipe Image">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 >Lentil soup </h5>
+                    <p >Lentil soup is a favorite of mine because it’s comforting, simple, and easy
+                        to throw together. It’s my go-to meal when I want something hearty and
+                        nourishing, or when I’m planning a vegetarian dinner with friends on a
+                        chilly day. This pared-down, quick-cooking red lentil soup is the one I
+                        added to my canon of fall recipes and the one that I make most often, and
+                        it never fails to please <a th:href="@{/recipe/Lentil Soup}">Read more</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
