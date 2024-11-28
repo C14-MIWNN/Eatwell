@@ -18,10 +18,10 @@
     <div class="row gx-3 gy-4" style="text-align: center;">
         <h1>Categories</h1>
         <div class="col-sm-6 col-md-3 mb-4" th:each="category : ${allCategories}">
-            <div class="card h-100" style="width: 70%; margin-left: 60px">
+            <div class="card h-100" style="width: 70%; margin-left: 3em">
                 <img th:src="@{'/images/' + ${category.categoryName} + '.png'}"
                      th:alt="'Category Image'"
-                     style="height: 180px; object-fit: cover;">
+                     style="height: 14em; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">
                         <a th:href="@{/category/{name}(name=${category.categoryName})}" th:text="${category.categoryName}"></a>
