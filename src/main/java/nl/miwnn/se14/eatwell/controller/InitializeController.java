@@ -13,6 +13,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author Bart Molenaars
  * Sets initial data for testing purposes.
@@ -26,7 +29,9 @@ public class InitializeController {
     private final IngredientRepository ingredientRepository;
 
     public InitializeController(RecipeRepository recipeRepository,
-                                EatWellUserService eatWellUserService, CategoryRepository categoryRepository, IngredientRepository ingredientRepository){
+                                EatWellUserService eatWellUserService,
+                                CategoryRepository categoryRepository,
+                                IngredientRepository ingredientRepository){
         this.eatWellUserService = eatWellUserService;
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
@@ -69,11 +74,6 @@ public class InitializeController {
     makeIngredient("Basil");
     makeIngredient("Black pepper");
 
-
-
-
-
-
     }
 
 
@@ -90,12 +90,6 @@ public class InitializeController {
         categoryRepository.save(category);
     }
 
-    private void  makeRecipe(String name, String description){
-        Recipe recipe = new Recipe();
-        recipe.setRecipe_name(name);
-        recipe.setDescription(description);
-        recipeRepository.save(recipe);
-    }
 
     public void makeIngredient(String name){
         Ingredient ingredient = new Ingredient();

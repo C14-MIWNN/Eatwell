@@ -33,7 +33,7 @@ public class Recipe {
     @JoinTable(name = "Recipe_Category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private List<Category> categories;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Ingredient",
@@ -85,11 +85,11 @@ public class Recipe {
         this.description = description;
     }
 
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
@@ -129,5 +129,11 @@ public class Recipe {
         return lowercase;
 
     }
+
+    public Category chooseCategory(List<Category> categories, int categoryID){
+        Category chosenCategory = categories.get(categoryID);
+        return chosenCategory;
+    }
+
 
 }
