@@ -13,6 +13,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author Bart Molenaars
  * Sets initial data for testing purposes.
@@ -41,7 +44,7 @@ public class InitializeController {
     }
 
     private void initializeDB(){
-    makeEatWellUser("user", "password");
+    //makeEatWellUser("user", "password");
 
     makeCategory("Breakfast");
     makeCategory("Desserts");

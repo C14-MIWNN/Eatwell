@@ -16,10 +16,14 @@ public class NameTests {
         Recipe recipe = new Recipe();
 
         //Act
-        int lowerCase = recipe.countNumberOfLowerCase("Furkan");
+        int lowerCase = recipe.countLowerCase("Furkan");
 
 
         //Assert
         assertEquals(5, lowerCase, "Should be 5");
+
+
+        int upperCaseString = recipe.countLowerCase("FURKAN");
+        assertEquals(0, upperCaseString, "Uppercase string should return 0");
     }
 }

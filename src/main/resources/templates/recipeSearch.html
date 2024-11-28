@@ -18,7 +18,7 @@
                      style="height: 200px; width: 275px">
                 <div class="card-body">
                     <h5 class="card-title">
-                         <span th:text="${recepie.recipe_name}"></span>
+                        <a th:href="@{/recipe/{name}(name=${recepie.recipe_name})}" th:text="${recepie.recipe_name}"></a>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
                         Description: <span th:text="${recepie.description}"></span>

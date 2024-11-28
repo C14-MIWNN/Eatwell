@@ -24,10 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author Furkan Altay
- * Purpose for the class
- */
+
 
 @Controller
 public class RecipeController {

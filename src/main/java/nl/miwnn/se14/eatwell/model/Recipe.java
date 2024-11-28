@@ -5,10 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author Furkan Altay
- *
- */
 
 @Entity
 public class Recipe {
@@ -37,10 +33,18 @@ public class Recipe {
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(name = "Recipe_Ingredient",
-            joinColumns = @JoinColumn(name = "recipe_id",nullable = true),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id",nullable = true))
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
+    public Recipe(String name, String description, String imageUrl, String instructions, Set<Category> categories, List<Ingredient> ingredients) {
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.instructions = instructions;
+        this.categories = categories;
+        this.ingredients = ingredients;
+    }
 
     @ManyToOne
     private EatWellUser author;
@@ -117,17 +121,16 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public int countNumberOfLowerCase(String inputString) {
-        int lowercase = 0;
+    public int countLowerCase(String inputString) {
+        int lowercaseCount = 0;
 
         for (int i = 0; i < inputString.length(); i++) {
             if (Character.isLowerCase(inputString.charAt(i))) {
-                lowercase++;
+                lowercaseCount++;
             }
         }
 
-        return lowercase;
-
+        return lowercaseCount;
     }
 
 }
