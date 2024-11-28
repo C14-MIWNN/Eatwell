@@ -46,7 +46,7 @@ public class InitializeController {
     }
 
     private void initializeDB(){
-    //makeEatWellUser("user", "password");
+    makeEatWellUser("user", "password");
 
     makeCategory("Breakfast");
     makeCategory("Desserts");

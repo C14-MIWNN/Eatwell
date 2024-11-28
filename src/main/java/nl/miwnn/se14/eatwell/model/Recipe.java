@@ -37,14 +37,6 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
-    public Recipe(String name, String description, String imageUrl, String instructions, Set<Category> categories, List<Ingredient> ingredients) {
-        this.name = name;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.instructions = instructions;
-        this.categories = categories;
-        this.ingredients = ingredients;
-    }
 
     @ManyToOne
     private EatWellUser author;
